@@ -16,7 +16,6 @@
           "type": "story",
           "settings": {
             "title": "Tom Ford",
-            "image": "shopify://shop_images/Tom_ford.avif",
             "link": "shopify://collections/tomford®"
           }
         },
@@ -24,7 +23,6 @@
           "type": "story",
           "settings": {
             "title": "Baccarat",
-            "image": "shopify://shop_images/Baccarat_Rouge.png",
             "link": "shopify://collections/baccarat-rouge®"
           }
         },
@@ -32,7 +30,6 @@
           "type": "story",
           "settings": {
             "title": "LV",
-            "image": "shopify://shop_images/new-arribals.png",
             "link": "shopify://collections/louis-vuitton®"
           }
         },
@@ -40,7 +37,6 @@
           "type": "story",
           "settings": {
             "title": "Creed",
-            "image": "shopify://shop_images/Creed.png",
             "link": "shopify://collections/creed®"
           }
         },
@@ -48,7 +44,6 @@
           "type": "story",
           "settings": {
             "title": "Dior",
-            "image": "shopify://shop_images/dior.avif",
             "link": "shopify://collections/dior®"
           }
         },
@@ -57,7 +52,6 @@
           "disabled": true,
           "settings": {
             "title": "Xerjoff",
-            "image": "shopify://shop_images/xerjoff.avif",
             "link": ""
           }
         }
@@ -78,7 +72,7 @@
       "name": "Homepage Hero",
       "settings": {
         "background_color": "#121212",
-        "image": "shopify://shop_images/tryscent-hero-section-image_dfbc9685-5a4c-4b6b-9eb2-d5e6fcb1cf41.png",
+        "image": "shopify://shop_images/tryscent-hero-section.png",
         "review_text": "LOVED BY 10,000 CUSTOMERS",
         "title": "Luxury that fools the nose, not the wallet.”",
         "subtitle": "Our fragrances are TryScent originals, created to stir memory and mood — without the markup of marketing myths.",
@@ -146,21 +140,21 @@
         "review_LM3NkM": {
           "type": "review",
           "settings": {
-            "review_image": "shopify://shop_images/eloquent_1.png",
+            "review_image": "shopify://shop_images/cosmopolitan_1.png",
             "review_content": "“Everything I’ve ordered smells amazing and the scent really lasts!”"
           }
         },
         "review_Lgzbga": {
           "type": "review",
           "settings": {
-            "review_image": "shopify://shop_images/vogue.png",
+            "review_image": "shopify://shop_images/eloquent_1.png",
             "review_content": "“A lovely pick for holiday vibes or a quick, charming gift.”"
           }
         },
         "review_m4Wt3r": {
           "type": "review",
           "settings": {
-            "review_image": "shopify://shop_images/cosmopolitan_1.png",
+            "review_image": "shopify://shop_images/vogue.png",
             "review_content": "“This feels so authentic, and last longer than we thought.”"
           }
         }
@@ -213,7 +207,6 @@
         "heading": "Selected for you",
         "button_text": "Explore All",
         "button_link": "shopify://collections/all",
-        "explore_image": "shopify://shop_images/explore-all-image.png",
         "explore_heading": "All Scents, Well Selected",
         "explore_subheading": "200+ scents to choose from",
         "padding_top": 52,
@@ -226,7 +219,6 @@
         "perks_Cj3EAR": {
           "type": "perks",
           "settings": {
-            "perk_image": "shopify://shop_images/carrot.svg",
             "perk_title": "Cruelty Free",
             "perk_content": "Perk Content"
           }
@@ -234,7 +226,6 @@
         "perks_Ynh4gw": {
           "type": "perks",
           "settings": {
-            "perk_image": "shopify://shop_images/diamond.svg",
             "perk_title": "High Quality",
             "perk_content": "Perk Content"
           }
@@ -242,7 +233,6 @@
         "perks_iX4iTY": {
           "type": "perks",
           "settings": {
-            "perk_image": "shopify://shop_images/clock-check.svg",
             "perk_title": "Long-Lasting",
             "perk_content": "Perk Content"
           }
@@ -250,7 +240,6 @@
         "perks_CBpKqp": {
           "type": "perks",
           "settings": {
-            "perk_image": "shopify://shop_images/world-pin.svg",
             "perk_title": "Made in Canada",
             "perk_content": "Perk Content"
           }
@@ -276,21 +265,18 @@
         "perk_wnTHMw": {
           "type": "perk",
           "settings": {
-            "icon": "shopify://shop_images/sandwatch.svg",
             "text": "Lasts 12+ Hours"
           }
         },
         "perk_VkFF3N": {
           "type": "perk",
           "settings": {
-            "icon": "shopify://shop_images/heart.svg",
             "text": "loved by 10,000+"
           }
         },
         "perk_cG7y8p": {
           "type": "perk",
           "settings": {
-            "icon": "shopify://shop_images/sheild-star.svg",
             "text": "60 day satisfaction guarantee"
           }
         }
@@ -302,8 +288,6 @@
       ],
       "name": "Special Offer",
       "settings": {
-        "background_image": "shopify://shop_images/Frame_349.png",
-        "offer_image": "shopify://shop_images/Group_27.png",
         "offer_text": "Special Offer",
         "offer_title": "Buy More, Get More Free",
         "offer_description": "Choose your perfect bundle and receive matching free bottles in the same size: 30ml, 50ml, or 100ml.",
@@ -320,7 +304,6 @@
         "collection_t6NHM7": {
           "type": "collection",
           "settings": {
-            "image": "shopify://shop_images/explore.png",
             "heading": "Scents For Women",
             "subheading": "100+ scents to choose from",
             "button_text": "Explore",
@@ -331,7 +314,6 @@
         "collection_zqtLKY": {
           "type": "collection",
           "settings": {
-            "image": "shopify://shop_images/scent-for-men-explore-img.png",
             "heading": "Scents For Men",
             "subheading": "100+ scents to choose from",
             "button_text": "Explore",
@@ -358,7 +340,6 @@
         "testimonial_3jMx8n": {
           "type": "testimonial",
           "settings": {
-            "image": "shopify://shop_images/explore.png",
             "name": "Marcus R.",
             "quote": "I didn’t expect much, but this is my new signature. It smells expensive, lasts all day, and actually turns heads."
           }
@@ -366,7 +347,6 @@
         "testimonial_Bh4nVA": {
           "type": "testimonial",
           "settings": {
-            "image": "shopify://shop_images/explore.png",
             "name": "Marcus R.",
             "quote": "I didn’t expect much, but this is my new signature. It smells expensive, lasts all day, and actually turns heads."
           }
@@ -374,7 +354,6 @@
         "testimonial_P4hxWQ": {
           "type": "testimonial",
           "settings": {
-            "image": "shopify://shop_images/explore.png",
             "name": "Marcus R.",
             "quote": "I didn’t expect much, but this is my new signature. It smells expensive, lasts all day, and actually turns heads."
           }
@@ -382,7 +361,6 @@
         "testimonial_yja8kV": {
           "type": "testimonial",
           "settings": {
-            "image": "shopify://shop_images/explore.png",
             "name": "Marcus R.",
             "quote": "I didn’t expect much, but this is my new signature. It smells expensive, lasts all day, and actually turns heads."
           }
@@ -390,7 +368,6 @@
         "testimonial_MGyB3e": {
           "type": "testimonial",
           "settings": {
-            "image": "shopify://shop_images/explore.png",
             "name": "Marcus R.",
             "quote": "I didn’t expect much, but this is my new signature. It smells expensive, lasts all day, and actually turns heads."
           }
@@ -398,7 +375,6 @@
         "testimonial_EQziDc": {
           "type": "testimonial",
           "settings": {
-            "image": "shopify://shop_images/explore.png",
             "name": "Marcus R.",
             "quote": "I didn’t expect much, but this is my new signature. It smells expensive, lasts all day, and actually turns heads."
           }
@@ -424,21 +400,18 @@
         "perk_HrfwXR": {
           "type": "perk",
           "settings": {
-            "icon": "shopify://shop_images/sandwatch.svg",
             "text": "Lasts 12+ Hours"
           }
         },
         "perk_d4dqHJ": {
           "type": "perk",
           "settings": {
-            "icon": "shopify://shop_images/heart.svg",
             "text": "loved by 10,000+"
           }
         },
         "perk_9CajQF": {
           "type": "perk",
           "settings": {
-            "icon": "shopify://shop_images/sheild-star.svg",
             "text": "60 day satisfaction guarantee"
           }
         }
@@ -450,8 +423,6 @@
       ],
       "name": "Special Offer",
       "settings": {
-        "background_image": "shopify://shop_images/special-offer-two-bg.png",
-        "offer_image": "shopify://shop_images/special-offer-two-bottle.png",
         "offer_text": "Special Offer",
         "offer_title": "Your Next Signature Scent, Trial-Sized.",
         "offer_description": "Not ready to commit? Our travel-size perfumes let you explore luxe fragrances one spritz at a time.Perfect for pockets, purses, and perfume commitment issues.",
@@ -512,7 +483,6 @@
       "settings": {
         "background_color": "#ffffff",
         "makes_diferent_title": "What Makes TryScent Different? Everything That Matters.",
-        "makes-different-image": "shopify://shop_images/makes-different-img_6a2b529a-e439-40fc-9580-88d632f61ea6.png",
         "makes-different-btn-text": "BUY 2 GET 1 FREE - ENDS SOON!",
         "makes-different-btn-link": "",
         "padding_top": 72,
@@ -527,17 +497,6 @@
     },
     "17551175978bd893d1": {
       "type": "apps",
-      "blocks": {
-        "instagram_feed_mp_instagram_block_8an3Yk": {
-          "type": "shopify://apps/instagram-feed/blocks/mp_instagram_block/2e85b90f-5da9-4654-967e-051f1942340c",
-          "settings": {
-            "mp_instagram_feed_id": ""
-          }
-        }
-      },
-      "block_order": [
-        "instagram_feed_mp_instagram_block_8an3Yk"
-      ],
       "disabled": true,
       "settings": {
         "include_margins": true
