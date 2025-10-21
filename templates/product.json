@@ -16,10 +16,6 @@
           "type": "title",
           "settings": {}
         },
-        "judge_me_reviews_preview_badge_kpVGVR": {
-          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {}
-        },
         "selling_points_9tdid6": {
           "type": "selling_points",
           "disabled": true,
@@ -104,7 +100,6 @@
           "type": "money_back",
           "disabled": true,
           "settings": {
-            "image": "shopify://shop_images/wt-money-back_1.svg",
             "title": "Try It Risk-Free",
             "text": "<p>Less Than 1% claim Money Back.</p>"
           }
@@ -116,11 +111,6 @@
         },
         "cta_review_g7n3R8": {
           "type": "cta_review",
-          "disabled": true,
-          "settings": {}
-        },
-        "judge_me_reviews_review_snippet_widget_R7mLaR": {
-          "type": "shopify://apps/judge-me-reviews/blocks/review_snippet_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
           "disabled": true,
           "settings": {}
         },
@@ -208,7 +198,6 @@
       },
       "block_order": [
         "title",
-        "judge_me_reviews_preview_badge_kpVGVR",
         "selling_points_9tdid6",
         "cheaper_than_yDGYG9",
         "mobile_gallery_FUEn6Y",
@@ -224,7 +213,6 @@
         "money_back_eKXfnE",
         "people_purchased_cYxaYJ",
         "cta_review_g7n3R8",
-        "judge_me_reviews_review_snippet_widget_R7mLaR",
         "collapsible_tab_XYmgtQ",
         "collapsible_tab_PtUaDN",
         "collapsible_tab_tUEYBx",
@@ -482,7 +470,7 @@
       "name": "TryScent Statistics",
       "settings": {
         "background_color": "#faf9f6",
-        "statistic_image": "shopify://shop_images/banana3_-_usd.jpg",
+        "statistic_image": "shopify://shop_images/Frame_180.png",
         "heading": "10,000+ TryScent Bottles Shipped Worldwide",
         "disclaimer": "*RESULTS BASED ON 1,000+ POST-PURCHASE SURVEYS",
         "padding_top": 12,
@@ -549,24 +537,6 @@
     },
     "1755117642437d279b": {
       "type": "apps",
-      "blocks": {
-        "instagram_feed_mp_instagram_block_FgtetG": {
-          "type": "shopify://apps/instagram-feed/blocks/mp_instagram_block/2e85b90f-5da9-4654-967e-051f1942340c",
-          "settings": {
-            "mp_instagram_feed_id": ""
-          }
-        },
-        "judge_me_reviews_featured_carousel_TFtrbC": {
-          "type": "shopify://apps/judge-me-reviews/blocks/featured_carousel/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {
-            "maxwidth": 1080
-          }
-        }
-      },
-      "block_order": [
-        "instagram_feed_mp_instagram_block_FgtetG",
-        "judge_me_reviews_featured_carousel_TFtrbC"
-      ],
       "disabled": true,
       "settings": {
         "include_margins": true
@@ -574,26 +544,6 @@
     },
     "1751863713a9594609": {
       "type": "apps",
-      "blocks": {
-        "judge_me_reviews_featured_carousel_xprgeq": {
-          "type": "shopify://apps/judge-me-reviews/blocks/featured_carousel/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {
-            "maxwidth": 1400
-          }
-        },
-        "judge_me_reviews_review_widget_K8hgi4": {
-          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "disabled": true,
-          "settings": {
-            "review_data": "sample_data",
-            "max_width": 1200
-          }
-        }
-      },
-      "block_order": [
-        "judge_me_reviews_featured_carousel_xprgeq",
-        "judge_me_reviews_review_widget_K8hgi4"
-      ],
       "custom_css": [],
       "settings": {
         "include_margins": true
@@ -624,7 +574,6 @@
       "disabled": true,
       "name": "t:sections.image-with-text.presets.name",
       "settings": {
-        "image": "shopify://shop_images/tryscent_factory.png",
         "height": "adapt",
         "desktop_image_width": "medium",
         "layout": "image_first",
@@ -727,7 +676,6 @@
       "name": "Tryscent Guarantee",
       "settings": {
         "background_color": "#fcfbf9",
-        "icon": "shopify://shop_images/wt-money-back_1.svg",
         "title": "TryScent Guarantee",
         "description": "<p>At TryScent, we believe in fragrances that make you feel amazing. That's why we offer a 60-day money-back guarantee—so you can shop with confidence.</p><p>If you're not completely in love with your scent, simply return it within 60 days for a full refund. No hassle, no stress—just a promise that you'll find a fragrance you truly adore.</p>",
         "padding_top": 72,
@@ -764,7 +712,6 @@
       "custom_css": [],
       "name": "t:sections.image-with-text.presets.name",
       "settings": {
-        "image": "shopify://shop_images/tryscent_factory.png",
         "height": "adapt",
         "desktop_image_width": "medium",
         "layout": "image_first",
