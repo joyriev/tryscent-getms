@@ -306,20 +306,22 @@
         "collection_t6NHM7": {
           "type": "collection",
           "settings": {
+            "image": "shopify://shop_images/explore.png",
             "heading": "Scents For Women",
             "subheading": "100+ scents to choose from",
             "button_text": "Explore",
-            "button_link": "shopify://collections/woman",
+            "button_link": "shopify://collections/tryscent",
             "collection": "woman"
           }
         },
         "collection_zqtLKY": {
           "type": "collection",
           "settings": {
+            "image": "shopify://shop_images/scent-for-men-explore-img.png",
             "heading": "Scents For Men",
             "subheading": "100+ scents to choose from",
             "button_text": "Explore",
-            "button_link": "shopify://collections/man",
+            "button_link": "shopify://collections/all",
             "collection": "man"
           }
         }
