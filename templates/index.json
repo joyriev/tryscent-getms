@@ -289,6 +289,7 @@
       ],
       "name": "Special Offer",
       "settings": {
+        "background_image": "shopify://shop_images/special-offer-two-bg.webp",
         "offer_text": "Special Offer",
         "offer_title": "Buy More, Get More Free",
         "offer_description": "Choose your perfect bundle and receive matching free bottles in the same size: 30ml, 50ml, or 100ml.",
@@ -424,6 +425,7 @@
       ],
       "name": "Special Offer",
       "settings": {
+        "background_image": "shopify://shop_images/special-offer-two-bg.webp",
         "offer_text": "Special Offer",
         "offer_title": "Your Next Signature Scent, Trial-Sized.",
         "offer_description": "Not ready to commit? Our travel-size perfumes let you explore luxe fragrances one spritz at a time.Perfect for pockets, purses, and perfume commitment issues.",
@@ -484,6 +486,7 @@
       "settings": {
         "background_color": "#ffffff",
         "makes_diferent_title": "What Makes TryScent Different? Everything That Matters.",
+        "makes-different-image": "shopify://shop_images/makes-diffrent-img.png",
         "makes-different-btn-text": "BUY 2 GET 1 FREE - ENDS SOON!",
         "makes-different-btn-link": "",
         "padding_top": 72,
