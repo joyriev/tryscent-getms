@@ -315,7 +315,7 @@
             "subheading": "100+ scents to choose from",
             "button_text": "Explore",
             "button_link": "shopify://collections/tryscent",
-            "collection": "woman"
+            "collection": "perfume-gifts"
           }
         },
         "collection_zqtLKY": {
@@ -326,7 +326,7 @@
             "subheading": "100+ scents to choose from",
             "button_text": "Explore",
             "button_link": "shopify://collections/all",
-            "collection": "man"
+            "collection": "tryscent"
           }
         }
       },
