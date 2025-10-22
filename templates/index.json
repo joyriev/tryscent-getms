@@ -75,7 +75,7 @@
         "image": "shopify://shop_images/tryscent-hero-section.png",
         "review_text": "LOVED BY 10,000 CUSTOMERS",
         "title": "Luxury that fools the nose, not the wallet.”",
-        "subtitle": "Our fragrances are TryScent originals, created to stir memory and mood — without the markup of marketing myths.",
+        "subtitle": "The fragrances are originals, created to stir memory and mood — without the markup of marketing myths.",
         "button_text": "Save 90% on Men's/Women's Perfume",
         "button_link": "shopify://pages/build-your-bundle",
         "secondary_button_text": "Not sure yet? Explore More →",
@@ -106,7 +106,7 @@
           "type": "label",
           "settings": {
             "icon": "shopify://shop_images/verified-svgrepo-com.svg",
-            "label": "100% Authentic TryScent formulation"
+            "label": "100% Authentic formulation"
           }
         },
         "label_8KQqAa": {
@@ -495,7 +495,7 @@
       "name": "Makes Different",
       "settings": {
         "background_color": "#ffffff",
-        "makes_diferent_title": "What Makes TryScent Different? Everything That Matters.",
+        "makes_diferent_title": "What Makes Perfumes Different? Everything That Matters.",
         "makes-different-image": "shopify://shop_images/makes-diffrent-img.png",
         "makes-different-btn-text": "BUY 2 GET 1 FREE - ENDS SOON!",
         "makes-different-btn-link": "",
