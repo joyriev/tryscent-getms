@@ -80,6 +80,11 @@
         "padding_bottom": 36
       }
     },
+    "soft_logos_pdp": {
+      "type": "soft-logos-pdp",
+      "name": "Soft Logos PDP",
+      "settings": {}
+    },
     "related-products": {
       "type": "related-products",
       "settings": {
@@ -185,6 +190,7 @@
     "main",
     "soft_pdp_top_h66qbr",
     "main_product_soft_qGFda9",
+    "soft_logos_pdp",
     "related-products",
     "faq_section_UkAH9d"
   ]

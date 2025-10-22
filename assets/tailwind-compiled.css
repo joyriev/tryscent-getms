@@ -2337,6 +2337,10 @@
     .sm\:grid-cols-2 {
         grid-template-columns: repeat(2, minmax(0, 1fr))
     }
+
+    .sm\:grid-cols-3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr))
+    }
 }
 
 @media (min-width: 768px) {
@@ -2427,6 +2431,10 @@
         grid-template-columns: repeat(8, minmax(0, 1fr))
     }
 
+    .md\:grid-cols-6 {
+        grid-template-columns: repeat(6, minmax(0, 1fr))
+    }
+
     .md\:flex-row {
         flex-direction: row
     }
@@ -2437,6 +2445,10 @@
 
     .md\:flex-col {
         flex-direction: column
+    }
+
+    .md\:flex-nowrap {
+        flex-wrap: nowrap
     }
 
     .md\:items-start {
@@ -2461,6 +2473,10 @@
 
     .md\:gap-0 {
         gap: 0px
+    }
+
+    .md\:gap-8 {
+        gap: 32px
     }
 
     .md\:space-y-6 > :not([hidden]) ~ :not([hidden]) {
