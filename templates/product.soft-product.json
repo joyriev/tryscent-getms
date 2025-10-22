@@ -55,13 +55,23 @@
             "show_dynamic_checkout": true,
             "show_gift_card_recipient": true
           }
+        },
+        "collapsible_tab_tM73bD": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Product information",
+            "icon": "none",
+            "content": "{{ product.description }}",
+            "page": ""
+          }
         }
       },
       "block_order": [
         "title_iwKJVW",
         "price_ictRR9",
         "selling_points_tJAJXm",
-        "buy_buttons_WVf4rV"
+        "buy_buttons_WVf4rV",
+        "collapsible_tab_tM73bD"
       ],
       "name": "Main Product Soft",
       "settings": {
