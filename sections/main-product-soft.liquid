@@ -76,7 +76,7 @@
   <div class="page-width">
     <div style="display: flex;" class="product product--{{ section.settings.media_size }} product--{{ section.settings.media_position }} product--{{ section.settings.gallery_layout }} product--mobile-{{ section.settings.mobile_thumbnails }} grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
       <div class="grid__item product__media-wrapper pb-6 [display:none] md:block">
-        {% render 'product-media-gallery', variant_images: variant_images %}
+        {% render 'product-media-gallery-soft', variant_images: variant_images %}
       </div>
       <div class="product__info-wrapper grid__item{% if settings.page_width > 1400 and section.settings.media_size == "small" %} product__info-wrapper--extra-padding{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
         <section
@@ -92,15 +92,15 @@
               {%- when 'selling_points' -%}
                 <ul class="list-none p-0">
                   <li class="flex gap-2 items-center text-gray-950 mb-4 leading-[1.2]">
-                    <img src="{{ 'tryscent-bottle.svg' | asset_url }}" alt="" height="24" width="24">
+                    <img src="{{ 'icon-tick.svg' | asset_url }}" alt="" height="24" width="24">
                     Digital download
                   </li>
                   <li class="flex gap-2 items-center text-gray-950 mb-4 leading-[1.2]">
-                    <img src="{{ 'tryscent-bottle.svg' | asset_url }}" alt="" height="24" width="24">
+                    <img src="{{ 'icon-tick.svg' | asset_url }}" alt="" height="24" width="24">
                     Lifetime support at no extra cost
                   </li>
                   <li class="flex gap-2 items-center text-gray-950 mb-4 leading-[1.2]">
-                    <img src="{{ 'tryscent-bottle.svg' | asset_url }}" alt="" height="24" width="24">
+                    <img src="{{ 'icon-tick.svg' | asset_url }}" alt="" height="24" width="24">
                      👋 New here?
                   </li>
                 </ul>
