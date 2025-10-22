@@ -264,45 +264,65 @@
         "collapsible_row_xCBCEX": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "Collapsible row",
-            "icon": "check_mark",
-            "row_content": "",
+            "heading": "How long does it take to receive my GetMsOffice order?",
+            "icon": "none",
+            "row_content": "<p>As soon as we are able to successfully process your payment, you will receive a download link for your product and a Product Key from GemsOffice. This process is usually between 15-20 minutes. If your SoftwareKeep order is delayed longer than this, please refer to your GetMsOffice account for the details of your purchase.</p>",
             "page": ""
           }
         },
-        "collapsible_row_TLdx8Y": {
+        "collapsible_row_zCpGyy": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "Collapsible row",
-            "icon": "check_mark",
-            "row_content": "",
+            "heading": "How can I be certain that my copy of Office is genuine?",
+            "icon": "none",
+            "row_content": "<p>At GetMsOffice, we’re committed to providing only 100% genuine and authentic software. Every product you purchase from us is backed by our hassle-free money-back guarantee, giving you peace of mind with every order. For added security and product tracking, we recommend registering your software license through the official online activation process.</p>",
             "page": ""
           }
         },
-        "collapsible_row_dEX87b": {
+        "collapsible_row_9nLm4f": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "Collapsible row",
-            "icon": "check_mark",
-            "row_content": "",
+            "heading": "How long does a genuine software license from GetMsOffice last?",
+            "icon": "none",
+            "row_content": "<p>The license for any product purchased from SoftwareKeep is a lifetime (perpetual) license. You may be required to purchase a new license with a new version of the product. In some cases, you might be eligible for an upgrade license from GetMsOffice that will allow you to upgrade at a discount price.</p>",
             "page": ""
           }
         },
-        "collapsible_row_JHcQ8w": {
+        "collapsible_row_XhKArz": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "Collapsible row",
-            "icon": "check_mark",
-            "row_content": "",
+            "heading": "Can I buy a single-use license software and install on multiple computers?",
+            "icon": "none",
+            "row_content": "<p>The software licenses sold by GetMsOffice are intended for installation and activation on one computer only, unless otherwise specified for that particular product. Retail and OEM software licenses we provide are designed and licensed for use on a single computer. Installing a single-use license from GetMsOffice on multiple computers is not permitted under the license terms and conditions.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_dYnLVP": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "What is a digital download and how does it work?",
+            "icon": "none",
+            "row_content": "<p>A digital download is an electronic version of your software product, giving you access to download and use your new software immediately. This means that a physical CD or DVD disc is not included with your purchase. The software install program is downloaded through cloud-based storage.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_thihtA": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "What are retail software products?",
+            "icon": "none",
+            "row_content": "<p>Softwarekeep Retail software products are the same physical items you would purchase at your local software stores. They are packaged for retail sale and usually include the original box, physical CD or DVD disk(s), a manual, the paper license agreement, and an Activation Key/Code. Similar to OEM software, a Retail Product is licensed for use on one computer only.</p>",
             "page": ""
           }
         }
       },
       "block_order": [
         "collapsible_row_xCBCEX",
-        "collapsible_row_TLdx8Y",
-        "collapsible_row_dEX87b",
-        "collapsible_row_JHcQ8w"
+        "collapsible_row_zCpGyy",
+        "collapsible_row_9nLm4f",
+        "collapsible_row_XhKArz",
+        "collapsible_row_dYnLVP",
+        "collapsible_row_thihtA"
       ],
       "name": "FAQ Section",
       "settings": {
