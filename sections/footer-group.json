@@ -50,7 +50,7 @@
           "type": "text",
           "settings": {
             "heading": "Contact",
-            "subtext": "<p><strong>Address</strong></p><p>Marmora Road, Glasgow D04 89 GR UK John Dalton Street Manchester MA M2 6LN UK<br/><br/><a href=\"tel:+44 116 350 0058\" title=\"tel:+44 116 350 0058\">+44 116 350 0058</a></p><p><strong>Email: </strong>sales@getmsoffice.com</p>"
+            "subtext": "<p><strong>Address: </strong>Marmora Road, Glasgow D04 89 GR UK John Dalton Street Manchester MA M2 6LN UK<br/><br/><a href=\"tel:+44 116 350 0058\" title=\"tel:+44 116 350 0058\">+44 116 350 0058</a></p><p><strong>Email: </strong>sales@getmsoffice.com</p>"
           }
         }
       },

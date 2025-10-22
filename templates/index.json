@@ -273,6 +273,7 @@
         },
         "perk_VkFF3N": {
           "type": "perk",
+          "disabled": true,
           "settings": {
             "icon": "shopify://shop_images/heart.svg",
             "text": "loved by 10,000+"
@@ -415,6 +416,7 @@
         },
         "perk_d4dqHJ": {
           "type": "perk",
+          "disabled": true,
           "settings": {
             "icon": "shopify://shop_images/heart.svg",
             "text": "loved by 10,000+"
