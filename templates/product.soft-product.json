@@ -39,11 +39,19 @@
         "selling_points_tJAJXm": {
           "type": "selling_points",
           "settings": {}
+        },
+        "buy_buttons_WVf4rV": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": true
+          }
         }
       },
       "block_order": [
         "title_iwKJVW",
-        "selling_points_tJAJXm"
+        "selling_points_tJAJXm",
+        "buy_buttons_WVf4rV"
       ],
       "name": "Main Product Soft",
       "settings": {
