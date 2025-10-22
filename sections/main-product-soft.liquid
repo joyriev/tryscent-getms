@@ -89,69 +89,20 @@
             {%- case block.type -%}
               {%- when '@app' -%}
                 {% render block %}
-              {% when 'inspired_by' %}
-                <div class="line-clamp-1 relative !-my-2">
-                  <span class="italic tracking-tighter">Inspired by</span> <a href="/search?q={{ product.metafields.custom.forgaylawyers | url_encode }}" class="font-semibold text-lg not-italic tracking-tight text-gray-900 ![text-decoration:none]">{{ product.metafields.custom.forgaylawyers }}</a>
-                </div>
-              {% when 'cheaper_than' %}
-                {% if product.metafields.custom.nuta  != blank %}
-                  <div class="flex items-center gap-1 font-semibold text-black">
-                    <span class="cheaper_than_text">"...{{ product.metafields.custom.nuta | remove: 'Inspired By: ' | remove: 'Inspired by: ' }}..."</span> 
-                  </div>
-                {% endif %}
-                {% if product.metafields.custom.bundle_product_content != blank %}
-                  <div class="flex items-center gap-1 font-normal text-black leading-[normal]">
-                    <span class="cheaper_than_text" style="font-size: 14px; line-height: normal;">{{ product.metafields.custom.bundle_product_content }}</span> 
-                  </div>
-                {% endif %}
-                {% if product.tags contains 'Special_Offer' %}
-                  <div style="
-                    display: inline-block;
-                    background-color: #f44336;
-                    color: white;
-                    padding: 0px 12px;
-                    font-weight: bold;
-                    border-radius: 4px;
-                    font-size: 14px;
-                    letter-spacing: 1px;
-                    text-transform: uppercase; 
-                  ">
-                    Special Offer
-                  </div>
-                {% endif %}
-                {% if product.metafields.custom.choose_your_fragrances_options != blank %}
-                  <div class="product-info__text">
-                    <div class="text-sm font-semibold text-black leading-normal" style="font-size:20px;">
-                      Works out at just {{ product.price | divided_by: product.metafields.custom.choose_your_fragrances_options | money }}/bottle
-                    </div>
-                  </div>
-                {% endif %}
-                
-              {%- when 'mobile_gallery' -%}
-                <div class="md:hidden">
-                  {% render 'product-mobile-media-gallery', variant_images: variant_images %}
-                </div>
-              {%- when 'reactive_variant_selector' -%}
-                <div class="reactive-variant-selector">
-                  {% render 'reactive-variant-selector', product: product %}
-                </div>
-              {%- when 'shipping_text' -%}
-                <div class="!my-6">
-                  <p class="my-0 text-center font-semibold tracking-normal">
-                    5-8 Days Delivery to <span class="shipping_location">Worldwide</span>
-                  </p>
-                  <p class="my-0 text-center tracking-normal shipping_text_canada">
-                    *Shipping Fee Calculated At Checkout
-                  </p>
-                </div>
               {%- when 'selling_points' -%}
                 <ul class="list-none p-0">
-                  {% for item in product.metafields.custom.selling_points.value %}
-                    <li class="flex gap-2 items-center text-gray-950 mb-4 leading-[1.2]">
-                      <img src="{{ 'tryscent-bottle.svg' | asset_url }}" alt="" height="24" width="24">
-                      {{ item }}
-                    </li>
-                  {% endfor %}
+                  <li class="flex gap-2 items-center text-gray-950 mb-4 leading-[1.2]">
+                    <img src="{{ 'tryscent-bottle.svg' | asset_url }}" alt="" height="24" width="24">
+                    Digital download
+                  </li>
+                  <li class="flex gap-2 items-center text-gray-950 mb-4 leading-[1.2]">
+                    <img src="{{ 'tryscent-bottle.svg' | asset_url }}" alt="" height="24" width="24">
+                    Lifetime support at no extra cost
+                  </li>
+                  <li class="flex gap-2 items-center text-gray-950 mb-4 leading-[1.2]">
+                    <img src="{{ 'tryscent-bottle.svg' | asset_url }}" alt="" height="24" width="24">
+                     👋 New here?
+                  </li>
                 </ul>
               {%- when 'money_back' -%}
                 <div class="flex items-center gap-3 bg-[#f0f2ec] p-6 rounded">
@@ -226,7 +177,7 @@
                       {% endif %}
                     </div>
                   {%- endif -%}  
-                  <h1 class="font-[700]  capitalize !tracking-normal flex flex-col pt-8">
+                  <h1 class="font-[700]  capitalize !tracking-normal flex flex-col">
                       {{ product.title }}
                   </h1>
                 </div>
@@ -855,8 +806,6 @@
     </script>
   </div>
 </product-info>
-
-{% render 'atc-builder-products-modal' %}
   
 <script>
   document.addEventListener("DOMContentLoaded", function () {
