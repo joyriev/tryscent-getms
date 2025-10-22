@@ -301,7 +301,7 @@
       "settings": {
         "padding_top": 72,
         "padding_bottom": 72,
-        "background_color": "#FFFFFF"
+        "background_color": "#ffffff"
       }
     },
     "scent_breakdown_rG4H3T": {
@@ -378,7 +378,7 @@
       "settings": {
         "background_color": "#faf9f6",
         "title": "How TryScent Stacks Up",
-        "btn_text": "SHOP TRYSCENT NOW",
+        "btn_text": "SHOP NOW",
         "btn_url": "shopify://collections/all",
         "padding_top": 32,
         "padding_bottom": 72
