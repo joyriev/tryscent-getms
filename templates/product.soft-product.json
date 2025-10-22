@@ -41,6 +41,10 @@
           "type": "title",
           "settings": {}
         },
+        "price_ictRR9": {
+          "type": "price",
+          "settings": {}
+        },
         "selling_points_tJAJXm": {
           "type": "selling_points",
           "settings": {}
@@ -55,6 +59,7 @@
       },
       "block_order": [
         "title_iwKJVW",
+        "price_ictRR9",
         "selling_points_tJAJXm",
         "buy_buttons_WVf4rV"
       ],
