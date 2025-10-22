@@ -29,6 +29,11 @@
         "padding_bottom": 72
       }
     },
+    "soft_pdp_top_h66qbr": {
+      "type": "soft-pdp-top",
+      "name": "Soft PDP top",
+      "settings": {}
+    },
     "main_product_soft_qGFda9": {
       "type": "main-product-soft",
       "blocks": {
@@ -173,6 +178,7 @@
   },
   "order": [
     "main",
+    "soft_pdp_top_h66qbr",
     "main_product_soft_qGFda9",
     "related-products",
     "faq_section_UkAH9d"
