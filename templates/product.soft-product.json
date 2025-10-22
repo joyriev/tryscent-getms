@@ -35,10 +35,15 @@
         "title_iwKJVW": {
           "type": "title",
           "settings": {}
+        },
+        "selling_points_tJAJXm": {
+          "type": "selling_points",
+          "settings": {}
         }
       },
       "block_order": [
-        "title_iwKJVW"
+        "title_iwKJVW",
+        "selling_points_tJAJXm"
       ],
       "name": "Main Product Soft",
       "settings": {
