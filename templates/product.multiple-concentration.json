@@ -70,7 +70,7 @@
         "custom_liquid_G7fm64": {
           "type": "custom_liquid",
           "settings": {
-            "custom_liquid": "{% render 'atc-bundle-builder' %}"
+            "custom_liquid": "{% render 'abb-multiple-concentration' %}"
           }
         },
         "custom_liquid_eKzwKK": {
@@ -120,16 +120,6 @@
             "heading": "Description",
             "icon": "clipboard",
             "content": "{{ product.description }}",
-            "page": ""
-          }
-        },
-        "collapsible_tab_PtUaDN": {
-          "type": "collapsible_tab",
-          "disabled": true,
-          "settings": {
-            "heading": "Scent Notes",
-            "icon": "perfume",
-            "content": "{{ product.metafields.custom.scent_profile | metafield_tag }}",
             "page": ""
           }
         },
@@ -214,7 +204,6 @@
         "people_purchased_cYxaYJ",
         "cta_review_g7n3R8",
         "collapsible_tab_XYmgtQ",
-        "collapsible_tab_PtUaDN",
         "collapsible_tab_tUEYBx",
         "collapsible_tab_nhKiAc",
         "collapsible_tab_pCrhqV",
