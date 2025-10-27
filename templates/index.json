@@ -69,6 +69,7 @@
     },
     "homepage_hero_GDeBtq": {
       "type": "homepage-hero",
+      "disabled": true,
       "name": "Homepage Hero",
       "settings": {
         "background_color": "#121212",
@@ -86,10 +87,10 @@
     },
     "home_hero_banner_MKgPnd": {
       "type": "home-hero-banner",
-      "disabled": true,
       "name": "Home Hero Banner",
       "settings": {
-        "image": "shopify://shop_images/header_-_english_-_usd_1.png",
+        "image": "shopify://shop_images/USD_New_banner.png",
+        "mobile_image": "shopify://shop_images/USD_New_banner.png",
         "link": ""
       }
     },
