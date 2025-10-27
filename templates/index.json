@@ -84,6 +84,15 @@
         "padding_bottom": 40
       }
     },
+    "home_hero_banner_MKgPnd": {
+      "type": "home-hero-banner",
+      "disabled": true,
+      "name": "Home Hero Banner",
+      "settings": {
+        "image": "shopify://shop_images/header_-_english_-_usd_1.png",
+        "link": ""
+      }
+    },
     "marquee_labels_RLdqpN": {
       "type": "marquee-labels",
       "blocks": {
@@ -579,6 +588,7 @@
   "order": [
     "insta_story",
     "homepage_hero_GDeBtq",
+    "home_hero_banner_MKgPnd",
     "marquee_labels_RLdqpN",
     "magazine_reviews_AeDF9g",
     "homepage_products_tab_RwziwE",
