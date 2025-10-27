@@ -951,6 +951,12 @@
     margin-bottom: calc(16px * var(--tw-space-y-reverse))
 }
 
+.space-y-6 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-y-reverse: 0;
+    margin-top: calc(24px * calc(1 - var(--tw-space-y-reverse)));
+    margin-bottom: calc(24px * var(--tw-space-y-reverse))
+}
+
 .overflow-hidden {
     overflow: hidden
 }
@@ -1151,6 +1157,11 @@
 .border-white {
     --tw-border-opacity: 1;
     border-color: rgb(255 255 255 / var(--tw-border-opacity, 1))
+}
+
+.\!border-\[\#22613a\] {
+    --tw-border-opacity: 1 !important;
+    border-color: rgb(34 97 58 / var(--tw-border-opacity, 1)) !important
 }
 
 .border-b-gray-100 {
@@ -1667,8 +1678,16 @@
     font-size: 24px
 }
 
+.text-\[22px\] {
+    font-size: 22px
+}
+
 .text-\[26px\] {
     font-size: 26px
+}
+
+.text-\[28px\] {
+    font-size: 28px
 }
 
 .text-base {
@@ -1902,6 +1921,11 @@
     color: rgb(230 74 74 / var(--tw-text-opacity, 1))
 }
 
+.text-slate-900 {
+    --tw-text-opacity: 1;
+    color: rgb(15 23 42 / var(--tw-text-opacity, 1))
+}
+
 .text-white {
     --tw-text-opacity: 1;
     color: rgb(255 255 255 / var(--tw-text-opacity, 1))
@@ -1919,6 +1943,15 @@
 .text-yellow-500 {
     --tw-text-opacity: 1;
     color: rgb(234 179 8 / var(--tw-text-opacity, 1))
+}
+
+.text-white\/80 {
+    color: rgb(255 255 255 / 0.8)
+}
+
+.\!text-\[\#22613a\] {
+    --tw-text-opacity: 1 !important;
+    color: rgb(34 97 58 / var(--tw-text-opacity, 1)) !important
 }
 
 .line-through {

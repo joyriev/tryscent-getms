@@ -70,7 +70,7 @@
         "custom_liquid_G7fm64": {
           "type": "custom_liquid",
           "settings": {
-            "custom_liquid": "{% render 'atc-bundle-builder' %}"
+            "custom_liquid": "{% render 'reactive-variant-selector' %}"
           }
         },
         "custom_liquid_eKzwKK": {
