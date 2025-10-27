@@ -87,20 +87,42 @@
     {% if product.metafields.custom.choose_your_fragrances_options != blank %}
     <div class="choose-fragrances-container">
       <p><strong>Choose your fragrances:</strong></p>
+      {% comment %} {% assign title = product.title %}
+      {% assign clean = title | remove: 'x' | remove: 'ml' | remove: 'ML' | remove: 'Perfume' | remove: 'Bottles' | remove: 'Bottle' | strip %}
+
+      {%- comment -%}
+      Split the title into words, then loop to find the numeric one
+      {%- endcomment -%}
+      {% assign words = clean | split: ' ' %}
+      {% assign size = '' %}
+
+      {% for word in words %}
+        {% if word contains '30' or word contains '50' or word contains '100' or word contains '150' %}
+          {% assign size = word %}
+          {% break %}
+        {% endif %}
+      {% endfor %}
+
+      {% capture ml_value %}
+         {{ size }}
+      {% endcapture %} {% endcomment %}
+      {% assign productml= product.metafields.custom.select_bundle_dropdown_ml %}
       {% for loop in (1..product.metafields.custom.choose_your_fragrances_options) %}
         <div class="choose-fragrances-opts choose-fragrances-opt-{{ forloop.index }} ">
           <label class="form__label" for="Bottle-{{ forloop.index }}">Bottle {{ forloop.index }}:</label>
           <div class="select">
             <select id="Bottle-{{ forloop.index }}" class="select__select" name="properties[Bottle {{ forloop.index }}]">
               {% for product in collections.all.products %}
-                {% assign sel_var = selected_variant.title %}
+                {% assign sel_var = "false" %}
                 {% for variant in product.variants %}
-                  {% if variant.title contains '100' %}
+                  {% if variant.title contains productml %}
                     {% assign sel_var = variant.title %}
                     {% break %}
                   {% endif %}
                 {% endfor %}
-                <option value="{{ product.title }} - {{ sel_var }}">{{ product.title }} - {{ sel_var }}</option>
+                {%if sel_var != "false" %}
+                  <option value="{{ product.title }} - {{ sel_var }}">{{ product.title }} Inspired by {{ product.metafields.custom.nuta }} - {{ sel_var }}</option>
+                {% endif %}
               {% endfor %}
             </select>
           </div>
@@ -137,7 +159,21 @@
     </button>
   {%- endform -%}
 </product-form>
-
+<div class="product-info__liquid">
+  <div class="flex items-center gap-3 text-base">
+    <img
+      src="https://cdn.shopify.com/s/files/1/0623/0691/0402/files/thimbs_up.png?v=1751372431"
+      alt="Thumbs up badge"
+      class="w-10 h-10 flex-shrink-0"
+      width="40"
+      height="40"
+    />
+    <div class="text-slate-900">
+      <strong class="font-semibold">Try it for 60 days, risk-free.</strong>
+      <span class="block">If you're not absolutely thrilled, we'll give you a full refund!</span>
+    </div>
+  </div>
+</div>
 {% unless product.tags contains 'Hide_Bundle' %}
  {% comment %} Bundle builder {% endcomment %}
   <div x-data>
