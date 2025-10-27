@@ -104,21 +104,50 @@
                     <span class="cheaper_than_text" style="font-size: 14px; line-height: normal;">{{ product.metafields.custom.bundle_product_content }}</span> 
                   </div>
                 {% endif %}
-                {% if product.tags contains 'Special_Offer' %}
-                  <div style="
-                    display: inline-block;
-                    background-color: #f44336;
-                    color: white;
-                    padding: 0px 12px;
-                    font-weight: bold;
-                    border-radius: 4px;
-                    font-size: 14px;
-                    letter-spacing: 1px;
-                    text-transform: uppercase; 
-                  ">
-                    Special Offer
+                <!--- special Badage -------->
+                  {% if product.tags contains 'Special_Offer' %}
+                    <div style="
+                      display: inline-block;
+                      background-color: #f44336;
+                      color: white;
+                      padding: 0px 12px;
+                      font-weight: bold;
+                      border-radius: 4px;
+                      font-size: 14px;
+                      letter-spacing: 1px;
+                      text-transform: uppercase; 
+                    ">
+                      Special Offer
+                    </div>
+                  {% endif %}
+                <!--- End special Badage -------->
+                {% if product.tags contains 'Bundle_Price_Show' %}
+                  <div id="price-{{ section.id }}" class="bundle-price-pdp" role="status" {{ block.shopify_attributes }}>
+                    {% if product.compare_at_price > product.price %}
+                      {% assign discount = product.compare_at_price | minus: product.price %}
+                      {% assign discount_percent = discount | times: 100 | divided_by: product.compare_at_price | round %}
+                    {% endif %}
+
+                    <div class="flex items-center gap-3 text-2xl">
+                      {% if product.compare_at_price > product.price %}
+                        <span class="text-red-600 font-bold text-[28px] discount-percent">
+                          -{{ discount_percent }}%
+                        </span>
+                      {% endif %}
+
+                      <span class="text-black font-bold text-[28px] product-price">
+                        {{ product.price | money }}
+                      </span>
+
+                      {% if product.compare_at_price > product.price %}
+                        <span class="text-gray-500 font-semibold line-through text-[22px] compare-price">
+                         RRP: {{ product.compare_at_price | money }}
+                        </span>
+                      {% endif %}
+                    </div>
                   </div>
                 {% endif %}
+
                 {% if product.metafields.custom.choose_your_fragrances_options != blank %}
                   <div class="product-info__text">
                     <div class="text-sm font-semibold text-black leading-normal" style="font-size:20px;">
@@ -230,6 +259,7 @@
                       {{ product.title }}
                   </h1>
                 </div>
+
               {%- when 'price' -%}
                 <div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
                   {%- render 'price',
