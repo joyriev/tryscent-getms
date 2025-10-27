@@ -31,13 +31,6 @@
           "type": "mobile_gallery",
           "settings": {}
         },
-        "variant_picker": {
-          "type": "variant_picker",
-          "settings": {
-            "picker_type": "button",
-            "swatch_shape": "circle"
-          }
-        },
         "price": {
           "type": "price",
           "disabled": true,
@@ -190,7 +183,6 @@
         "selling_points_9tdid6",
         "cheaper_than_yDGYG9",
         "mobile_gallery_FUEn6Y",
-        "variant_picker",
         "price",
         "quantity_selector",
         "buy_buttons",
