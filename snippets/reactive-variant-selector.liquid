@@ -10,16 +10,20 @@
 </style>
 <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
-
 <div x-data>
   {% for option in product.options_with_values %}
     <h3>{{ option.name }}</h3>
     <div class="flex gap-3 !mb-6">
       {% for value in option.values %}
         <button
-          @click="$store.variantSelector.option{{ forloop.parentloop.index }} = '{{ value }}'"
-          class="text-lg rounded-full px-5 py-2 border border-solid border-gray-200 cursor-pointer"
-          :class="'{{ value }}' === $store.variantSelector.option{{ forloop.parentloop.index }} ? 'bg-black text-white' : ''">
+          {% if forloop.parentloop.first %}
+          @click="$store.variantSelector.selectOption({{ forloop.parentloop.index }}, '{{ value | escape }}')"
+          {% else %}
+          x-show="$store.variantSelector.isOptionAvailable({{ forloop.parentloop.index }}, '{{ value | escape }}')"
+          @click="$store.variantSelector.selectOption({{ forloop.parentloop.index }}, '{{ value | escape }}')"
+          {% endif %}
+          class="text-lg rounded-full px-5 py-2 border border-solid border-gray-200 cursor-pointer transition-colors"
+          :class="'{{ value | escape }}' === $store.variantSelector.option{{ forloop.parentloop.index }} ? 'bg-black text-white' : 'hover:bg-gray-100'">
           {{ value }}
         </button>
       {% endfor %}
@@ -27,84 +31,85 @@
   {% endfor %}
 </div>
 
-<div x-data>
-  <p x-text="$store.variantSelector.currentVariant.id"></p>
-  <p x-text="$store.variantSelector.currentVariant.price"></p>
-  <p x-text="$store.variantSelector.currentVariant.compare_at_price"></p>
+<div x-data x-cloak>
+  <template x-if="$store.variantSelector.currentVariant">
+    <div>
+      <p class="text-2xl font-bold" x-text="$store.variantSelector.currentVariant.price"></p>
+      <p
+        x-show="$store.variantSelector.currentVariant.compare_at_price"
+        class="text-lg line-through text-gray-500"
+        x-text="$store.variantSelector.currentVariant.compare_at_price"></p>
+      <input
+        type="hidden"
+        name="id"
+        :value="$store.variantSelector.currentVariant.id">
+    </div>
+  </template>
 </div>
-
-<product-form
-  class="product-form !m-0"
-  data-hide-errors="{{ gift_card_recipient_feature_active }}"
-  data-section-id="{{ section.id }}">
-  {%- form 'product'
-    , product
-    , id: product_form_id
-    , class: 'form'
-    , novalidate: 'novalidate'
-    , data-type: 'add-to-cart-form'
-  -%}
-    <input
-      type="hidden"
-      name="id"
-      value="{{ selected_variant.id }}"
-      class="product-variant-id">
-    <button
-      type="submit"
-      name="add"
-      value="1"
-      class="atc-button cta_product_from_submit_btn flex flex-wrap items-center !mb-0 text-2xl !pb-3 !pt-3 rounded-lg button bg-[#22613a] hover:bg-[#368856] transition-colors shadow-xl tracking-normal button--full-width button--primary"
-      aria-label="Add to cart"
-      data-price="{{ selected_variant.price }}"
-      data-compare-at-price="{{ selected_variant.compare_at_price }}">
-      <span>Add to cart</span>
-      <div class="ml-2 pl-2 border-0 border-l flex items-center border-solid border-gray-200/20">
-        <div
-          class="inline-block text-lg bg-[#1E5834] px-3 rounded"
-          id="product-price"
-          role="status"
-          {{ block.shopify_attributes }}>
-          {% if selected_variant.compare_at_price > selected_variant.price %}
-            <span class="compare-price line-through text-white/50 text-base" style="display: inline;">
-              {{ selected_variant.compare_at_price | money }}
-            </span>
-          {% else %}
-            <span class="compare-price line-through text-white/50 text-base" style="display: none;"></span>
-          {% endif %}
-          <span class="current-price">{{ selected_variant.price | money }}</span>
-        </div>
-      </div>
-      {%- render 'loading-spinner' -%}
-    </button>
-  {%- endform -%}
-</product-form>
 
 <script>
   document.addEventListener('alpine:init', function() {
     Alpine.store('variantSelector', {
       {% for option in product.options_with_values %}
         {% assign option_key = 'option' | append: forloop.index %}
-        option{{ forloop.index }}: "{{ selected_variant[option_key] }}",
+        option{{ forloop.index }}: "{{ selected_variant[option_key] | escape }}",
       {% endfor %}
       availableVariants: [
         {% for variant in product.variants %}
           {
             id: {{ variant.id }},
+            available: {{ variant.available | json }},
             options: {{ variant.options | json }},
             price: "{{ variant.price | money }}",
             compare_at_price: "{{ variant.compare_at_price | money }}"
-          },
+          }{% unless forloop.last %},{% endunless %}
         {% endfor %}
       ],
+      
       get currentVariant() {
-        return this.availableVariants.find(variant => 
+        return this.availableVariants.find(variant => {
           {% for option in product.options_with_values %}
-            {% assign option_key = 'option' | append: forloop.index %}
-            variant.options.includes(this.option{{ forloop.index }}) &&
+            if (variant.options[{{ forloop.index0 }}] !== this.option{{ forloop.index }}) return false;
           {% endfor %}
-          true
-        );
+          return true;
+        });
+      },
+      
+      isOptionAvailable(optionIndex, optionValue) {
+        return this.availableVariants.some(variant => {
+          if (variant.options[optionIndex - 1] !== optionValue) return false;
+          
+          {% for option in product.options_with_values %}
+            if ({{ forloop.index }} < optionIndex) {
+              if (variant.options[{{ forloop.index0 }}] !== this.option{{ forloop.index }}) {
+                return false;
+              }
+            }
+          {% endfor %}
+          
+          return true;
+        });
+      },
+      
+      selectOption(optionIndex, optionValue) {
+        this['option' + optionIndex] = optionValue;
+        
+        // Check and auto-select unavailable subsequent options
+        {% for option in product.options_with_values %}
+          {% if forloop.index > 1 %}
+            if (optionIndex < {{ forloop.index }}) {
+              if (!this.isOptionAvailable({{ forloop.index }}, this.option{{ forloop.index }})) {
+                const availableOptions = {{ option.values | json }}.filter(val => 
+                  this.isOptionAvailable({{ forloop.index }}, val)
+                );
+                if (availableOptions.length > 0) {
+                  this.option{{ forloop.index }} = availableOptions[0];
+                }
+              }
+            }
+          {% endif %}
+        {% endfor %}
       }
-    })
-  })
+    });
+  });
 </script>
