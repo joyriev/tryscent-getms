@@ -95,8 +95,8 @@
                 </div>
               {% when 'cheaper_than' %}
                 {% if product.metafields.custom.nuta  != blank %}
-                  <div class="flex items-center gap-1 font-semibold text-black">
-                    <span class="cheaper_than_text">{{ product.metafields.custom.nuta }}</span> 
+                  <div class="flex items-center gap-1 text-black">
+                    Inspired By: <span class="cheaper_than_text font-semibold">{{ product.metafields.custom.nuta }}</span> 
                   </div>
                 {% endif %}
                 {% if product.metafields.custom.bundle_product_content != blank %}
