@@ -137,6 +137,10 @@
     top: 2px
 }
 
+.left-\[50\%\] {
+    left: 50%
+}
+
 .isolate {
     isolation: isolate
 }
