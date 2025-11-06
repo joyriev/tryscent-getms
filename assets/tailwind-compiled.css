@@ -258,6 +258,11 @@
     margin-bottom: 32px
 }
 
+.my-6 {
+    margin-top: 24px;
+    margin-bottom: 24px
+}
+
 .\!mb-0 {
     margin-bottom: 0px !important
 }
@@ -436,6 +441,10 @@
     display: inline-block
 }
 
+.\!inline-block {
+    display: inline-block !important
+}
+
 .inline {
     display: inline
 }
@@ -541,6 +550,11 @@
     height: 14px
 }
 
+.size-8 {
+    width: 32px;
+    height: 32px
+}
+
 .\!h-8 {
     height: 32px !important
 }
@@ -609,6 +623,10 @@
     height: 100vh
 }
 
+.h-\[8px\] {
+    height: 8px
+}
+
 .\!w-10 {
     width: 40px !important
 }
@@ -675,6 +693,10 @@
 
 .w-screen {
     width: 100vw
+}
+
+.w-\[8px\] {
+    width: 8px
 }
 
 .min-w-\[1rem\] {
@@ -911,6 +933,10 @@
 
 .gap-8 {
     gap: 32px
+}
+
+.gap-\[5px\] {
+    gap: 5px
 }
 
 .gap-x-2 {
@@ -1362,6 +1388,11 @@
     background-color: rgb(52 96 62 / var(--tw-bg-opacity, 1))
 }
 
+.bg-gray-300 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(209 213 219 / var(--tw-bg-opacity, 1))
+}
+
 .bg-opacity-50 {
     --tw-bg-opacity: 0.5
 }
@@ -1658,6 +1689,10 @@
     padding-top: 32px
 }
 
+.pb-3 {
+    padding-bottom: 12px
+}
+
 .text-left {
     text-align: left
 }
@@ -1805,6 +1840,10 @@
 
 .leading-tight {
     line-height: 1.25
+}
+
+.leading-4 {
+    line-height: 16px
 }
 
 .\!tracking-normal {
@@ -1963,6 +2002,11 @@
 .text-yellow-500 {
     --tw-text-opacity: 1;
     color: rgb(234 179 8 / var(--tw-text-opacity, 1))
+}
+
+.text-red-500 {
+    --tw-text-opacity: 1;
+    color: rgb(239 68 68 / var(--tw-text-opacity, 1))
 }
 
 .line-through {
@@ -2287,6 +2331,11 @@
     background-color: rgb(153 27 27 / var(--tw-bg-opacity, 1))
 }
 
+.hover\:bg-gray-900:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgb(17 24 39 / var(--tw-bg-opacity, 1))
+}
+
 .hover\:text-white:hover {
     --tw-text-opacity: 1;
     color: rgb(255 255 255 / var(--tw-text-opacity, 1))
@@ -2407,6 +2456,11 @@
 
     .md\:col-span-6 {
         grid-column: span 6 / span 6
+    }
+
+    .md\:mx-auto {
+        margin-left: auto;
+        margin-right: auto
     }
 
     .md\:mt-14 {
@@ -2585,6 +2639,10 @@
 
     .md\:text-left {
         text-align: left
+    }
+
+    .md\:text-center {
+        text-align: center
     }
 
     .md\:text-2xl {
