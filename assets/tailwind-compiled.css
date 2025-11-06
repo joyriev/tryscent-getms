@@ -169,6 +169,10 @@
     grid-column: span 4 / span 4
 }
 
+.col-span-5 {
+    grid-column: span 5 / span 5
+}
+
 .col-span-6 {
     grid-column: span 6 / span 6
 }
@@ -256,6 +260,10 @@
 
 .\!mb-4 {
     margin-bottom: 16px !important
+}
+
+.\!mb-6 {
+    margin-bottom: 24px !important
 }
 
 .\!mr-0 {
@@ -396,10 +404,6 @@
 
 .mt-\[44px\] {
     margin-top: 44px
-}
-
-.\!mb-6 {
-    margin-bottom: 24px !important
 }
 
 .line-clamp-1 {
@@ -799,6 +803,10 @@
 
 .grid-cols-1 {
     grid-template-columns: repeat(1, minmax(0, 1fr))
+}
+
+.grid-cols-10 {
+    grid-template-columns: repeat(10, minmax(0, 1fr))
 }
 
 .grid-cols-2 {
@@ -1469,6 +1477,11 @@
     padding-right: 16px
 }
 
+.px-5 {
+    padding-left: 20px;
+    padding-right: 20px
+}
+
 .px-6 {
     padding-left: 24px;
     padding-right: 24px
@@ -1542,11 +1555,6 @@
 .py-8 {
     padding-top: 32px;
     padding-bottom: 32px
-}
-
-.px-5 {
-    padding-left: 20px;
-    padding-right: 20px
 }
 
 .\!pb-3 {
@@ -1834,6 +1842,11 @@
     color: rgb(34 97 58 / var(--tw-text-opacity, 1))
 }
 
+.text-\[\#22613a\] {
+    --tw-text-opacity: 1;
+    color: rgb(34 97 58 / var(--tw-text-opacity, 1))
+}
+
 .text-\[\#888888\] {
     --tw-text-opacity: 1;
     color: rgb(136 136 136 / var(--tw-text-opacity, 1))
@@ -2063,6 +2076,10 @@
     background-image: linear-gradient(to bottom, #6e32e9, #ff19a8, #fed45d)
 }
 
+.\[display\:grid\] {
+    display: grid
+}
+
 .\[display\:none\] {
     display: none
 }
@@ -2236,6 +2253,11 @@
     background-color: rgb(54 136 86 / var(--tw-bg-opacity, 1))
 }
 
+.hover\:bg-gray-100:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgb(243 244 246 / var(--tw-bg-opacity, 1))
+}
+
 .hover\:bg-gray-300:hover {
     --tw-bg-opacity: 1;
     background-color: rgb(209 213 219 / var(--tw-bg-opacity, 1))
@@ -2261,11 +2283,6 @@
     background-color: rgb(153 27 27 / var(--tw-bg-opacity, 1))
 }
 
-.hover\:bg-gray-100:hover {
-    --tw-bg-opacity: 1;
-    background-color: rgb(243 244 246 / var(--tw-bg-opacity, 1))
-}
-
 .hover\:text-white:hover {
     --tw-text-opacity: 1;
     color: rgb(255 255 255 / var(--tw-text-opacity, 1))
@@ -2281,6 +2298,10 @@
 
 .hover\:opacity-75:hover {
     opacity: 0.75
+}
+
+.hover\:\[text-decoration\:none\]:hover {
+    text-decoration: none
 }
 
 .focus\:rounded:focus {
@@ -2372,8 +2393,16 @@
         grid-column: span 3 / span 3
     }
 
+    .md\:col-span-4 {
+        grid-column: span 4 / span 4
+    }
+
     .md\:col-span-5 {
         grid-column: span 5 / span 5
+    }
+
+    .md\:col-span-6 {
+        grid-column: span 6 / span 6
     }
 
     .md\:mt-14 {
@@ -2480,6 +2509,10 @@
 
     .md\:gap-12 {
         gap: 48px
+    }
+
+    .md\:gap-3 {
+        gap: 12px
     }
 
     .md\:gap-6 {
