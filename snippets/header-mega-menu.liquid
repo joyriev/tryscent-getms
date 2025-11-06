@@ -1,11 +1,15 @@
+{% assign bundle_product = all_products['4x-30ml-perfume-bottles'] %}
+
 <nav class="header__inline-menu">
   <ul class="list-menu list-menu--inline w-full justify-between gap-4 !pl-3" role="list">
     <li class="flex items-center">
-      <a
+       <a
         id="HeaderMenu-buy-3-get-1-free"
-        href="/pages/build-your-bundle"
+        href="/products/4x-30ml-perfume-bottles"
         class="bg-[linear-gradient(to_right,#226139,#26964F)] inline-block px-2 rounded no-underline text-white">
-        <span>Buy 2, Get 1 FREE</span>
+        <span>4 for
+          {{ bundle_product.price | money }}
+        </span>
       </a>
     </li>
     {% for link in linklists[section.settings.menu].links %}
