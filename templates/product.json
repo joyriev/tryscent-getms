@@ -67,8 +67,13 @@
           "disabled": true,
           "settings": {}
         },
+        "atc_bundle_builder_ipKhnU": {
+          "type": "atc_bundle_builder",
+          "settings": {}
+        },
         "custom_liquid_G7fm64": {
           "type": "custom_liquid",
+          "disabled": true,
           "settings": {
             "custom_liquid": "{% render 'atc-bundle-builder' %}"
           }
@@ -216,6 +221,7 @@
         "buy_buttons",
         "reactive_variant_selector_JyFrkg",
         "shipping_text_HCVN8A",
+        "atc_bundle_builder_ipKhnU",
         "custom_liquid_G7fm64",
         "custom_liquid_eKzwKK",
         "icon_with_text_rgXMXN",
