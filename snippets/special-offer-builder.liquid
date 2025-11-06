@@ -1,0 +1,63 @@
+{% liquid
+  assign product_form_id = 'product-form-' | append: section.id
+  assign selected_variant = product.selected_or_first_available_variant
+%}
+
+{% comment %} Add to cart form {% endcomment %}
+<product-form
+  x-data="specialOffer"
+  class="product-form !m-0"
+  data-hide-errors="{{ gift_card_recipient_feature_active }}"
+  data-section-id="{{ section.id }}">
+  {%- form 'product'
+    , product
+    , id: product_form_id
+    , class: 'form'
+    , novalidate: 'novalidate'
+    , data-type: 'add-to-cart-form'
+  -%}
+    <input
+      x-data
+      type="hidden"
+      name="id"
+      value="{{ selected_variant.id }}"
+      class="product-variant-id">
+    {% render 'bundle-mix-dropdown' %}
+    <button
+      x-data
+      type="submit"
+      name="add"
+      value="1"
+      class="atc-button cta_product_from_submit_btn flex flex-wrap items-center !mb-0 text-2xl !pb-3 !pt-3 rounded-lg button bg-[#22613a] hover:bg-[#368856] transition-colors shadow-xl tracking-normal button--full-width button--primary"
+      aria-label="Add to cart">
+      <span>Add to cart</span>
+      <div class="ml-2 pl-2 border-0 border-l flex items-center border-solid border-gray-200/20">
+        <div
+          class="inline-block text-lg bg-[#1E5834] px-3 rounded"
+          id="product-price"
+          role="status"
+          {{ block.shopify_attributes }}>
+          {% if selected_variant.compare_at_price > selected_variant.price %}
+            <span class="compare-price line-through text-white/50 text-base">{{ selected_variant.compare_at_price | money }}</span>
+          {% endif %}
+          <span class="current-price">{{ selected_variant.price | money }}</span>
+        </div>
+      </div>
+      {%- render 'loading-spinner' -%}
+    </button>
+  {%- endform -%}
+</product-form>
+<div class="my-6">
+  <div class="flex items-center gap-3 text-base">
+    <img
+      src="https://cdn.shopify.com/s/files/1/0623/0691/0402/files/thimbs_up.png?v=1751372431"
+      alt="Thumbs up badge"
+      class="w-10 h-10 flex-shrink-0"
+      width="40"
+      height="40" />
+    <div class="text-slate-900">
+      <strong class="font-semibold">Try it for 60 days, risk-free.</strong>
+      <span class="block">If you're not absolutely thrilled, we'll give you a full refund!</span>
+    </div>
+  </div>
+</div>
