@@ -90,7 +90,7 @@
       "name": "Home Hero Banner",
       "settings": {
         "image": "shopify://shop_images/USD.png",
-        "mobile_image": "shopify://shop_images/USD.png",
+        "mobile_image": "shopify://shop_images/mobile_USD.png",
         "link": ""
       }
     },
