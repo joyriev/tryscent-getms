@@ -29,6 +29,7 @@
         },
         "mobile_gallery_FUEn6Y": {
           "type": "mobile_gallery",
+          "disabled": true,
           "settings": {}
         },
         "variant_picker": {
