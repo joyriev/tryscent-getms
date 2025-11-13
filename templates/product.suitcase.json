@@ -277,12 +277,60 @@
         "padding_top": 72,
         "padding_bottom": 72
       }
+    },
+    "product_gallery_dHfwrF": {
+      "type": "product-gallery",
+      "blocks": {
+        "image_UJqrdG": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/PDP_Lifestyle_Carousel_Collectio.jpg",
+            "alt": ""
+          }
+        },
+        "image_djknXX": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/pdp_lifestylecarousel-1_1_720x_ba5c92d8-13bd-47c4-a6db-1bf1b3772d55.jpg",
+            "alt": ""
+          }
+        },
+        "image_dPpVmU": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/PDP_Lifestyle_Carousel_Collectio.jpg",
+            "alt": ""
+          }
+        },
+        "image_aG3H8b": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/pdp_lifestylecarousel-1_1_720x_ba5c92d8-13bd-47c4-a6db-1bf1b3772d55.jpg",
+            "alt": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_UJqrdG",
+        "image_djknXX",
+        "image_dPpVmU",
+        "image_aG3H8b"
+      ],
+      "name": "Product Gallery",
+      "settings": {
+        "background_color": "#f9f9f9",
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "max_width": 1400,
+        "border_radius": 12
+      }
     }
   },
   "order": [
     "main",
     "marquee_labels_dpeY47",
     "video_with_text_cpMzDz",
-    "related-products"
+    "related-products",
+    "product_gallery_dHfwrF"
   ]
 }
