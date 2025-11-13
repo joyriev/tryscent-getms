@@ -62,58 +62,55 @@
 
 .gallery-slider {
   display: flex;
-  align-items: stretch;
-}
-
-.gallery-slide {
-  padding: 0 {{ section.settings.slide_spacing }}px;
-  display: flex !important;
-  justify-content: center;
   align-items: center;
 }
 
-/* ✅ Keep all slides same height (based on tallest image) */
+/* ✅ Force all slides to equal height */
+.gallery-slider .slick-list {
+  display: flex;
+  align-items: center;
+  height: 75vh; /* same as Monos layout */
+  max-height: 900px;
+  min-height: 500px;
+}
+
+/* ✅ Slick track & slides keep alignment centered */
 .gallery-slider .slick-track {
   display: flex !important;
   align-items: center;
 }
 
-/* ✅ Each slide centers its image vertically */
 .gallery-slide {
-  height: auto;
+  padding: 0 {{ section.settings.slide_spacing }}px;
   display: flex !important;
   align-items: center;
   justify-content: center;
+  height: 100%;
 }
 
+/* ✅ Images are centered vertically, large ones fill height */
 .gallery-slide img {
-  max-height: 75vh; /* like Monos site */
+  height: 100%;
   width: auto;
   object-fit: contain;
   border-radius: {{ section.settings.border_radius }}px;
   transition: transform 0.4s ease, opacity 0.4s ease;
   opacity: 0.8;
   display: block;
-  margin: auto;
+  margin: 0 auto;
 }
 
-/* Center slide pops out slightly */
+/* ✅ Active (center) image pops out */
 .slick-center img {
   transform: scale(1.05);
   opacity: 1;
 }
 
-/* ✅ Keep consistent slide alignment */
-.slick-slide {
-  display: flex !important;
-  align-items: center;
-  justify-content: center;
-}
-
-/* ✅ Mobile adjustments */
+/* ✅ Fix mobile scaling */
 @media (max-width: 768px) {
-  .gallery-slide img {
-    max-height: 55vh;
+  .gallery-slider .slick-list {
+    height: 55vh;
+    min-height: 350px;
   }
 }
 {% endstyle %}
