@@ -339,9 +339,9 @@
         "max_width": 2500,
         "border_radius": 12,
         "slide_spacing": 20,
-        "center_padding": 15,
-        "page_dots": true,
-        "nav_buttons": false,
+        "center_padding": 25,
+        "page_dots": false,
+        "nav_buttons": true,
         "autoplay": false,
         "autoplay_speed": 4000
       }
