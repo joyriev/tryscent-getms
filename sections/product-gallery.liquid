@@ -30,7 +30,7 @@
       if ($gallery.length && !$gallery.hasClass('slick-initialized')) {
         $gallery.slick({
           centerMode: true,
-          centerPadding: '{{ section.settings.center_padding }}%',
+          centerPadding: '20%',
           slidesToShow: 1,
           infinite: true,
           arrows: {{ section.settings.nav_buttons }},
@@ -42,11 +42,11 @@
           responsive: [
             {
               breakpoint: 768,
-              settings: { centerPadding: '20%' }
+              settings: { centerPadding: '10%' }
             },
             {
               breakpoint: 480,
-              settings: { centerPadding: '20%' }
+              settings: { centerPadding: '5%' }
             }
           ]
         });
