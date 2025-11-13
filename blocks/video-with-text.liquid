@@ -1,19 +1,19 @@
 
-{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+{% assign video_section_id = block.id | replace: '_', '' | downcase %}
 
 {% style %}
-  .ai-video-text-{{ ai_gen_id }} {
+  .video-text-{{ video_section_id }} {
     padding: {{ block.settings.padding_top }}px 0 {{ block.settings.padding_bottom }}px;
     background-color: {{ block.settings.background_color }};
   }
 
-  .ai-video-text-container-{{ ai_gen_id }} {
+  .video-text-container-{{ video_section_id }} {
     max-width: {{ block.settings.container_width }}px;
     margin: 0 auto;
     padding: 0 20px;
   }
 
-  .ai-video-text-grid-{{ ai_gen_id }} {
+  .video-text-grid-{{ video_section_id }} {
     display: grid;
     grid-template-columns: 1fr;
     gap: {{ block.settings.column_gap }}px;
@@ -21,20 +21,20 @@
   }
 
   @media screen and (min-width: 750px) {
-    .ai-video-text-grid-{{ ai_gen_id }} {
+    .video-text-grid-{{ video_section_id }} {
       grid-template-columns: 1fr 1fr;
     }
 
-    .ai-video-text-grid-{{ ai_gen_id }}.ai-video-text-reverse-{{ ai_gen_id }} {
+    .video-text-grid-{{ video_section_id }}.video-text-reverse-{{ video_section_id }} {
       direction: rtl;
     }
 
-    .ai-video-text-grid-{{ ai_gen_id }}.ai-video-text-reverse-{{ ai_gen_id }} > * {
+    .video-text-grid-{{ video_section_id }}.video-text-reverse-{{ video_section_id }} > * {
       direction: ltr;
     }
   }
 
-  .ai-video-text-video-wrapper-{{ ai_gen_id }} {
+  .video-text-video-wrapper-{{ video_section_id }} {
     position: relative;
     width: 100%;
     padding-bottom: 100%;
@@ -43,7 +43,7 @@
     background-color: {{ block.settings.video_background }};
   }
 
-  .ai-video-text-video-{{ ai_gen_id }} {
+  .video-text-video-{{ video_section_id }} {
     position: absolute;
     top: 0;
     left: 0;
@@ -52,7 +52,7 @@
     object-fit: cover;
   }
 
-  .ai-video-text-placeholder-{{ ai_gen_id }} {
+  .video-text-placeholder-{{ video_section_id }} {
     position: absolute;
     top: 0;
     left: 0;
@@ -64,14 +64,14 @@
     background-color: #f4f4f4;
   }
 
-  .ai-video-text-placeholder-{{ ai_gen_id }} svg {
+  .video-text-placeholder-{{ video_section_id }} svg {
     width: 100%;
     height: 100%;
     max-width: 200px;
     max-height: 200px;
   }
 
-  .ai-video-text-empty-state-{{ ai_gen_id }} {
+  .video-text-empty-state-{{ video_section_id }} {
     position: absolute;
     bottom: 20px;
     left: 50%;
@@ -83,7 +83,7 @@
     pointer-events: none;
   }
 
-  .ai-video-text-content-{{ ai_gen_id }} {
+  .video-text-content-{{ video_section_id }} {
     display: flex;
     flex-direction: column;
     gap: {{ block.settings.content_gap }}px;
@@ -91,7 +91,7 @@
     padding: 0 {{ block.settings.content_padding }}px;
   }
 
-  .ai-video-text-eyebrow-{{ ai_gen_id }} {
+  .video-text-eyebrow-{{ video_section_id }} {
     margin: 0;
     font-size: {{ block.settings.eyebrow_size }}px;
     color: {{ block.settings.eyebrow_color }};
@@ -100,7 +100,7 @@
     font-weight: 500;
   }
 
-  .ai-video-text-heading-{{ ai_gen_id }} {
+  .video-text-heading-{{ video_section_id }} {
     margin: 0;
     font-size: {{ block.settings.heading_size }}px;
     color: {{ block.settings.heading_color }};
@@ -108,22 +108,22 @@
     font-weight: 400;
   }
 
-  .ai-video-text-description-{{ ai_gen_id }} {
+  .video-text-description-{{ video_section_id }} {
     margin: 0;
     font-size: {{ block.settings.text_size }}px;
     color: {{ block.settings.text_color }};
     line-height: 1.6;
   }
 
-  .ai-video-text-description-{{ ai_gen_id }} p {
+  .video-text-description-{{ video_section_id }} p {
     margin: 0 0 1em;
   }
 
-  .ai-video-text-description-{{ ai_gen_id }} p:last-child {
+  .video-text-description-{{ video_section_id }} p:last-child {
     margin-bottom: 0;
   }
 
-  .ai-video-text-button-{{ ai_gen_id }} {
+  .video-text-button-{{ video_section_id }} {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -139,13 +139,13 @@
     font-weight: 500;
   }
 
-  .ai-video-text-button-{{ ai_gen_id }}:hover {
+  .video-text-button-{{ video_section_id }}:hover {
     background-color: {{ block.settings.button_hover_background }};
     color: {{ block.settings.button_hover_text_color }};
     border-color: {{ block.settings.button_hover_border_color }};
   }
 
-  .ai-video-text-button-wrapper-{{ ai_gen_id }} {
+  .video-text-button-wrapper-{{ video_section_id }} {
     {% if block.settings.text_alignment == 'left' %}
       align-self: flex-start;
     {% elsif block.settings.text_alignment == 'center' %}
@@ -156,31 +156,31 @@
   }
 
   @media screen and (max-width: 749px) {
-    .ai-video-text-heading-{{ ai_gen_id }} {
+    .video-text-heading-{{ video_section_id }} {
       font-size: {{ block.settings.heading_size | times: 0.7 }}px;
     }
 
-    .ai-video-text-description-{{ ai_gen_id }} {
+    .video-text-description-{{ video_section_id }} {
       font-size: {{ block.settings.text_size | times: 0.9 }}px;
     }
 
-    .ai-video-text-eyebrow-{{ ai_gen_id }} {
+    .video-text-eyebrow-{{ video_section_id }} {
       font-size: {{ block.settings.eyebrow_size | times: 0.9 }}px;
     }
 
-    .ai-video-text-content-{{ ai_gen_id }} {
+    .video-text-content-{{ video_section_id }} {
       padding: 0;
     }
   }
 {% endstyle %}
 
-<div class="ai-video-text-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
-  <div class="ai-video-text-container-{{ ai_gen_id }}">
-    <div class="ai-video-text-grid-{{ ai_gen_id }} {% if block.settings.video_position == 'right' %}ai-video-text-reverse-{{ ai_gen_id }}{% endif %}">
-      <div class="ai-video-text-video-wrapper-{{ ai_gen_id }}">
+<div class="video-text-{{ video_section_id }}" {{ block.shopify_attributes }}>
+  <div class="video-text-container-{{ video_section_id }}">
+    <div class="video-text-grid-{{ video_section_id }} {% if block.settings.video_position == 'right' %}video-text-reverse-{{ video_section_id }}{% endif %}">
+      <div class="video-text-video-wrapper-{{ video_section_id }}">
         {% if block.settings.video_url != blank %}
           <video
-            class="ai-video-text-video-{{ ai_gen_id }}"
+            class="video-text-video-{{ video_section_id }}"
             {% if block.settings.autoplay %}autoplay{% endif %}
             {% if block.settings.loop %}loop{% endif %}
             {% if block.settings.muted %}muted{% endif %}
@@ -191,35 +191,35 @@
             Your browser does not support the video tag.
           </video>
         {% else %}
-          <div class="ai-video-text-placeholder-{{ ai_gen_id }}">
+          <div class="video-text-placeholder-{{ video_section_id }}">
             {{ 'image' | placeholder_svg_tag }}
-            <div class="ai-video-text-empty-state-{{ ai_gen_id }}">
+            <div class="video-text-empty-state-{{ video_section_id }}">
               Next, add a video URL
             </div>
           </div>
         {% endif %}
       </div>
 
-      <div class="ai-video-text-content-{{ ai_gen_id }}">
+      <div class="video-text-content-{{ video_section_id }}">
         {% if block.settings.eyebrow != blank %}
-          <p class="ai-video-text-eyebrow-{{ ai_gen_id }}">{{ block.settings.eyebrow }}</p>
+          <p class="video-text-eyebrow-{{ video_section_id }}">{{ block.settings.eyebrow }}</p>
         {% endif %}
 
         {% if block.settings.heading != blank %}
-          <h2 class="ai-video-text-heading-{{ ai_gen_id }}">{{ block.settings.heading }}</h2>
+          <h2 class="video-text-heading-{{ video_section_id }}">{{ block.settings.heading }}</h2>
         {% endif %}
 
         {% if block.settings.description != blank %}
-          <div class="ai-video-text-description-{{ ai_gen_id }}">
+          <div class="video-text-description-{{ video_section_id }}">
             {{ block.settings.description }}
           </div>
         {% endif %}
 
         {% if block.settings.button_text != blank %}
-          <div class="ai-video-text-button-wrapper-{{ ai_gen_id }}">
+          <div class="video-text-button-wrapper-{{ video_section_id }}">
             <a
               href="{{ block.settings.button_link }}"
-              class="ai-video-text-button-{{ ai_gen_id }}"
+              class="video-text-button-{{ video_section_id }}"
             >
               {{ block.settings.button_text }}
             </a>
