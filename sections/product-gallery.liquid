@@ -2,18 +2,22 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
 <section id="GallerySection-{{ section.id }}" class="gallery-slider-section"
-         style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;
-                background-color: {{ section.settings.background_color }};">
+  style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; background-color: {{ section.settings.background_color }};">
+
   <div class="gallery-slider-container" style="max-width: {{ section.settings.max_width }}px; margin: 0 auto;">
     <div class="gallery-slider">
       {%- for block in section.blocks -%}
         <div class="gallery-slide" {{ block.shopify_attributes }}>
           {% if block.settings.image != blank %}
-            <img src="{{ block.settings.image | img_url: 'master' }}"
-                 alt="{{ block.settings.alt | escape }}"
-                 loading="lazy"
-                 style="border-radius: {{ section.settings.border_radius }}px; width: 100%; display: block;" />
+            <div class="gallery-slide-inner">
+              <img
+                src="{{ block.settings.image | img_url: 'master' }}"
+                alt="{{ block.settings.alt | escape }}"
+                loading="lazy"
+              >
+            </div>
           {% endif %}
         </div>
       {%- endfor -%}
@@ -33,19 +37,16 @@
           dots: {{ section.settings.page_dots }},
           autoplay: {{ section.settings.autoplay }},
           autoplaySpeed: {{ section.settings.autoplay_speed }},
-          adaptiveHeight: true,
+          adaptiveHeight: false,
+          variableWidth: false,
           responsive: [
             {
               breakpoint: 768,
-              settings: {
-                centerPadding: '10%',
-              }
+              settings: { centerPadding: '10%' }
             },
             {
               breakpoint: 480,
-              settings: {
-                centerPadding: '5%',
-              }
+              settings: { centerPadding: '5%' }
             }
           ]
         });
@@ -58,16 +59,41 @@
 .gallery-slider-section {
   overflow: hidden;
 }
+.gallery-slider {
+  display: flex;
+  align-items: stretch;
+}
 .gallery-slide {
   padding: 0 {{ section.settings.slide_spacing }}px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.slick-slide img {
+.gallery-slide-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 500px; /* ✅ Adjust to your preferred min height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.gallery-slide img {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain; /* ✅ Prevents stretching */
+  border-radius: {{ section.settings.border_radius }}px;
   transition: transform 0.4s ease, opacity 0.4s ease;
   opacity: 0.8;
 }
 .slick-center img {
   transform: scale(1.05);
   opacity: 1;
+}
+.slick-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 {% endstyle %}
 
