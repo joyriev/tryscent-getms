@@ -1,6 +1,759 @@
+{% doc %}
+  @prompt
+    Please copy section named section-gallery on website
+    https://ca.monos.com/products/expandable-carry-on?variant=53151291015478
+    
+    I need replica of that section, why there is no slider
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-product-gallery-{{ ai_gen_id }} {
+    width: 100%;
+    padding: {{ block.settings.section_padding_top }}px 0 {{ block.settings.section_padding_bottom }}px;
+    background-color: {{ block.settings.background_color }};
+  }
+
+  .ai-product-gallery-container-{{ ai_gen_id }} {
+    max-width: {{ block.settings.container_width }}px;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+  }
+
+  .ai-product-gallery-slider-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ai-product-gallery-slider-{{ ai_gen_id }} {
+    display: flex;
+    gap: {{ block.settings.gap }}px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .ai-product-gallery-slider-{{ ai_gen_id }}::-webkit-scrollbar {
+    display: none;
+  }
+
+  .ai-product-gallery-item-{{ ai_gen_id }} {
+    position: relative;
+    flex: 0 0 calc((100% - ({{ block.settings.columns_desktop }} - 1) * {{ block.settings.gap }}px) / {{ block.settings.columns_desktop }});
+    aspect-ratio: {{ block.settings.image_ratio }};
+    overflow: hidden;
+    cursor: pointer;
+    background-color: #f5f5f5;
+  }
+
+  .ai-product-gallery-item-{{ ai_gen_id }} img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .ai-product-gallery-item-{{ ai_gen_id }}:hover img {
+    transform: scale(1.05);
+  }
+
+  .ai-product-gallery-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f5f5f5;
+    position: relative;
+  }
+
+  .ai-product-gallery-placeholder-{{ ai_gen_id }} svg {
+    width: 60%;
+    height: 60%;
+    opacity: 0.3;
+  }
+
+  .ai-product-gallery-empty-state-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+    pointer-events: none;
+  }
+
+  .ai-product-gallery-arrow-{{ ai_gen_id }} {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid #e0e0e0;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .ai-product-gallery-arrow-{{ ai_gen_id }}:hover {
+    background: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .ai-product-gallery-arrow-{{ ai_gen_id }}.disabled {
+    opacity: 0.3;
+    pointer-events: none;
+  }
+
+  .ai-product-gallery-arrow-prev-{{ ai_gen_id }} {
+    left: -24px;
+  }
+
+  .ai-product-gallery-arrow-next-{{ ai_gen_id }} {
+    right: -24px;
+  }
+
+  .ai-product-gallery-arrow-{{ ai_gen_id }} svg {
+    width: 20px;
+    height: 20px;
+    fill: #121212;
+  }
+
+  .ai-product-gallery-dots-{{ ai_gen_id }} {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 24px;
+  }
+
+  .ai-product-gallery-dot-{{ ai_gen_id }} {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #d0d0d0;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .ai-product-gallery-dot-{{ ai_gen_id }}.active {
+    background-color: #121212;
+    width: 24px;
+    border-radius: 4px;
+  }
+
+  .ai-product-gallery-modal-{{ ai_gen_id }} {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.95);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .ai-product-gallery-modal-{{ ai_gen_id }}.active {
+    display: flex;
+  }
+
+  .ai-product-gallery-modal-content-{{ ai_gen_id }} {
+    position: relative;
+    max-width: 90%;
+    max-height: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-product-gallery-modal-image-{{ ai_gen_id }} {
+    max-width: 100%;
+    max-height: 90vh;
+    object-fit: contain;
+  }
+
+  .ai-product-gallery-close-{{ ai_gen_id }} {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 40px;
+    cursor: pointer;
+    padding: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.3s ease;
+  }
+
+  .ai-product-gallery-close-{{ ai_gen_id }}:hover {
+    opacity: 0.7;
+  }
+
+  .ai-product-gallery-nav-{{ ai_gen_id }} {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: #ffffff;
+    font-size: 30px;
+    cursor: pointer;
+    padding: 20px;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+    backdrop-filter: blur(10px);
+  }
+
+  .ai-product-gallery-nav-{{ ai_gen_id }}:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .ai-product-gallery-modal-prev-{{ ai_gen_id }} {
+    left: 20px;
+  }
+
+  .ai-product-gallery-modal-next-{{ ai_gen_id }} {
+    right: 20px;
+  }
+
+  .ai-product-gallery-counter-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #ffffff;
+    font-size: 14px;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 8px 16px;
+    border-radius: 20px;
+  }
+
+  @media screen and (max-width: 989px) {
+    .ai-product-gallery-item-{{ ai_gen_id }} {
+      flex: 0 0 calc((100% - {{ block.settings.gap }}px) / 2);
+    }
+
+    .ai-product-gallery-arrow-prev-{{ ai_gen_id }} {
+      left: 10px;
+    }
+
+    .ai-product-gallery-arrow-next-{{ ai_gen_id }} {
+      right: 10px;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-product-gallery-item-{{ ai_gen_id }} {
+      flex: 0 0 calc((100% - ({{ block.settings.columns_mobile }} - 1) * {{ block.settings.gap | times: 0.5 }}px) / {{ block.settings.columns_mobile }});
+    }
+
+    .ai-product-gallery-slider-{{ ai_gen_id }} {
+      gap: {{ block.settings.gap | times: 0.5 }}px;
+    }
+
+    .ai-product-gallery-arrow-{{ ai_gen_id }} {
+      width: 40px;
+      height: 40px;
+    }
+
+    .ai-product-gallery-arrow-{{ ai_gen_id }} svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .ai-product-gallery-nav-{{ ai_gen_id }} {
+      width: 50px;
+      height: 50px;
+      font-size: 24px;
+      padding: 15px;
+    }
+
+    .ai-product-gallery-modal-prev-{{ ai_gen_id }} {
+      left: 10px;
+    }
+
+    .ai-product-gallery-modal-next-{{ ai_gen_id }} {
+      right: 10px;
+    }
+  }
+{% endstyle %}
+
+<product-gallery-{{ ai_gen_id }} class="ai-product-gallery-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-product-gallery-container-{{ ai_gen_id }}">
+    <div class="ai-product-gallery-slider-wrapper-{{ ai_gen_id }}">
+      <button class="ai-product-gallery-arrow-{{ ai_gen_id }} ai-product-gallery-arrow-prev-{{ ai_gen_id }}" aria-label="Previous slide">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M15 18l-6-6 6-6"/>
+        </svg>
+      </button>
+      
+      <div class="ai-product-gallery-slider-{{ ai_gen_id }}">
+        {% for i in (1..12) %}
+          {% liquid
+            assign image_key = 'image_' | append: i
+            assign image = block.settings[image_key]
+          %}
+          
+          {% if image != blank %}
+            <div class="ai-product-gallery-item-{{ ai_gen_id }}" data-index="{{ forloop.index0 }}">
+              <img
+                src="{{ image | image_url: width: 800 }}"
+                alt="{{ image.alt | escape }}"
+                loading="lazy"
+                width="{{ image.width }}"
+                height="{{ image.height }}"
+              >
+            </div>
+          {% elsif forloop.index == 1 %}
+            <div class="ai-product-gallery-item-{{ ai_gen_id }}">
+              <div class="ai-product-gallery-placeholder-{{ ai_gen_id }}">
+                {{ 'product-1' | placeholder_svg_tag }}
+                <div class="ai-product-gallery-empty-state-{{ ai_gen_id }}">
+                  Add images to gallery
+                </div>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+
+      <button class="ai-product-gallery-arrow-{{ ai_gen_id }} ai-product-gallery-arrow-next-{{ ai_gen_id }}" aria-label="Next slide">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M9 18l6-6-6-6"/>
+        </svg>
+      </button>
+    </div>
+
+    {% if block.settings.show_dots %}
+      <div class="ai-product-gallery-dots-{{ ai_gen_id }}"></div>
+    {% endif %}
+  </div>
+
+  <div class="ai-product-gallery-modal-{{ ai_gen_id }}" role="dialog" aria-modal="true" aria-label="Image gallery">
+    <div class="ai-product-gallery-modal-content-{{ ai_gen_id }}">
+      <button class="ai-product-gallery-close-{{ ai_gen_id }}" aria-label="Close gallery">×</button>
+      <button class="ai-product-gallery-nav-{{ ai_gen_id }} ai-product-gallery-modal-prev-{{ ai_gen_id }}" aria-label="Previous image">‹</button>
+      <img class="ai-product-gallery-modal-image-{{ ai_gen_id }}" src="" alt="">
+      <button class="ai-product-gallery-nav-{{ ai_gen_id }} ai-product-gallery-modal-next-{{ ai_gen_id }}" aria-label="Next image">›</button>
+      <div class="ai-product-gallery-counter-{{ ai_gen_id }}"></div>
+    </div>
+  </div>
+</product-gallery-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class ProductGallery{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.images = [];
+        this.currentIndex = 0;
+        this.currentSlide = 0;
+      }
+
+      connectedCallback() {
+        this.slider = this.querySelector('.ai-product-gallery-slider-{{ ai_gen_id }}');
+        this.prevArrow = this.querySelector('.ai-product-gallery-arrow-prev-{{ ai_gen_id }}');
+        this.nextArrow = this.querySelector('.ai-product-gallery-arrow-next-{{ ai_gen_id }}');
+        this.dotsContainer = this.querySelector('.ai-product-gallery-dots-{{ ai_gen_id }}');
+        this.modal = this.querySelector('.ai-product-gallery-modal-{{ ai_gen_id }}');
+        this.modalImage = this.querySelector('.ai-product-gallery-modal-image-{{ ai_gen_id }}');
+        this.closeBtn = this.querySelector('.ai-product-gallery-close-{{ ai_gen_id }}');
+        this.modalPrevBtn = this.querySelector('.ai-product-gallery-modal-prev-{{ ai_gen_id }}');
+        this.modalNextBtn = this.querySelector('.ai-product-gallery-modal-next-{{ ai_gen_id }}');
+        this.counter = this.querySelector('.ai-product-gallery-counter-{{ ai_gen_id }}');
+        this.items = this.querySelectorAll('.ai-product-gallery-item-{{ ai_gen_id }}');
+
+        this.collectImages();
+        this.setupSlider();
+        this.setupModal();
+      }
+
+      collectImages() {
+        this.items.forEach((item) => {
+          const img = item.querySelector('img');
+          if (img && !item.querySelector('.ai-product-gallery-placeholder-{{ ai_gen_id }}')) {
+            this.images.push({
+              src: img.src.replace(/width=\d+/, 'width=2000'),
+              alt: img.alt
+            });
+          }
+        });
+      }
+
+      setupSlider() {
+        if (this.images.length === 0) return;
+
+        this.prevArrow.addEventListener('click', () => this.slide(-1));
+        this.nextArrow.addEventListener('click', () => this.slide(1));
+
+        this.slider.addEventListener('scroll', () => {
+          this.updateArrows();
+          this.updateDots();
+        });
+
+        if (this.dotsContainer) {
+          this.createDots();
+        }
+
+        this.updateArrows();
+      }
+
+      slide(direction) {
+        const itemWidth = this.items[0].offsetWidth;
+        const gap = parseInt(getComputedStyle(this.slider).gap);
+        const scrollAmount = (itemWidth + gap) * direction;
+        
+        this.slider.scrollBy({
+          left: scrollAmount,
+          behavior: 'smooth'
+        });
+      }
+
+      updateArrows() {
+        const isAtStart = this.slider.scrollLeft <= 0;
+        const isAtEnd = this.slider.scrollLeft >= this.slider.scrollWidth - this.slider.clientWidth - 1;
+
+        if (isAtStart) {
+          this.prevArrow.classList.add('disabled');
+        } else {
+          this.prevArrow.classList.remove('disabled');
+        }
+
+        if (isAtEnd) {
+          this.nextArrow.classList.add('disabled');
+        } else {
+          this.nextArrow.classList.remove('disabled');
+        }
+      }
+
+      createDots() {
+        const totalSlides = Math.ceil(this.images.length / this.getVisibleItems());
+        
+        for (let i = 0; i < totalSlides; i++) {
+          const dot = document.createElement('button');
+          dot.classList.add('ai-product-gallery-dot-{{ ai_gen_id }}');
+          dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+          dot.addEventListener('click', () => this.goToSlide(i));
+          this.dotsContainer.appendChild(dot);
+        }
+
+        this.updateDots();
+      }
+
+      getVisibleItems() {
+        const width = window.innerWidth;
+        if (width <= 749) {
+          return parseInt('{{ block.settings.columns_mobile }}');
+        } else if (width <= 989) {
+          return 2;
+        } else {
+          return {{ block.settings.columns_desktop }};
+        }
+      }
+
+      goToSlide(index) {
+        const itemWidth = this.items[0].offsetWidth;
+        const gap = parseInt(getComputedStyle(this.slider).gap);
+        const visibleItems = this.getVisibleItems();
+        const scrollPosition = index * (itemWidth + gap) * visibleItems;
+        
+        this.slider.scrollTo({
+          left: scrollPosition,
+          behavior: 'smooth'
+        });
+      }
+
+      updateDots() {
+        if (!this.dotsContainer) return;
+
+        const dots = this.dotsContainer.querySelectorAll('.ai-product-gallery-dot-{{ ai_gen_id }}');
+        const itemWidth = this.items[0].offsetWidth;
+        const gap = parseInt(getComputedStyle(this.slider).gap);
+        const visibleItems = this.getVisibleItems();
+        const currentSlide = Math.round(this.slider.scrollLeft / ((itemWidth + gap) * visibleItems));
+
+        dots.forEach((dot, index) => {
+          if (index === currentSlide) {
+            dot.classList.add('active');
+          } else {
+            dot.classList.remove('active');
+          }
+        });
+      }
+
+      setupModal() {
+        this.items.forEach((item, index) => {
+          const img = item.querySelector('img');
+          if (img && !item.querySelector('.ai-product-gallery-placeholder-{{ ai_gen_id }}')) {
+            item.addEventListener('click', () => {
+              this.openModal(index);
+            });
+          }
+        });
+
+        this.closeBtn.addEventListener('click', () => this.closeModal());
+        this.modalPrevBtn.addEventListener('click', () => this.navigateModal(-1));
+        this.modalNextBtn.addEventListener('click', () => this.navigateModal(1));
+
+        this.modal.addEventListener('click', (e) => {
+          if (e.target === this.modal) {
+            this.closeModal();
+          }
+        });
+
+        document.addEventListener('keydown', (e) => {
+          if (!this.modal.classList.contains('active')) return;
+          
+          if (e.key === 'Escape') {
+            this.closeModal();
+          } else if (e.key === 'ArrowLeft') {
+            this.navigateModal(-1);
+          } else if (e.key === 'ArrowRight') {
+            this.navigateModal(1);
+          }
+        });
+      }
+
+      openModal(index) {
+        if (this.images.length === 0) return;
+        
+        this.currentIndex = index;
+        this.updateModalImage();
+        this.modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      closeModal() {
+        this.modal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      navigateModal(direction) {
+        this.currentIndex = (this.currentIndex + direction + this.images.length) % this.images.length;
+        this.updateModalImage();
+      }
+
+      updateModalImage() {
+        const image = this.images[this.currentIndex];
+        this.modalImage.src = image.src;
+        this.modalImage.alt = image.alt;
+        this.counter.textContent = `${this.currentIndex + 1} / ${this.images.length}`;
+      }
+    }
+
+    customElements.define('product-gallery-{{ ai_gen_id }}', ProductGallery{{ ai_gen_id }});
+  })();
+</script>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Product gallery",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "container_width",
+      "min": 1000,
+      "max": 1600,
+      "step": 100,
+      "unit": "px",
+      "label": "Container width",
+      "default": 1200
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "label": "Columns on desktop",
+      "default": 3
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Columns on mobile",
+      "options": [
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "label": "Gap between images",
+      "default": 8
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Image aspect ratio",
+      "options": [
+        {
+          "value": "1/1",
+          "label": "Square (1:1)"
+        },
+        {
+          "value": "3/4",
+          "label": "Portrait (3:4)"
+        },
+        {
+          "value": "4/3",
+          "label": "Landscape (4:3)"
+        },
+        {
+          "value": "16/9",
+          "label": "Widescreen (16:9)"
+        }
+      ],
+      "default": "3/4"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_dots",
+      "label": "Show navigation dots",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Gallery images"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "Image 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Image 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_3",
+      "label": "Image 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_4",
+      "label": "Image 4"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_5",
+      "label": "Image 5"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_6",
+      "label": "Image 6"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_7",
+      "label": "Image 7"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_8",
+      "label": "Image 8"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_9",
+      "label": "Image 9"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_10",
+      "label": "Image 10"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_11",
+      "label": "Image 11"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_12",
+      "label": "Image 12"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product gallery"
+    }
+  ]
+}
 {% endschema %}
