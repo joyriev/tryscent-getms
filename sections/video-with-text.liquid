@@ -1,312 +1,189 @@
-{% for block in section.blocks %}
-  {% assign video_section_id = block.id | replace: '_', '' | downcase %}
+<section
+  id="{{ section.id }}"
+  class="video-with-text"
+  style="
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background-color: {{ section.settings.background_color }};
+  "
+>
+  <div class="video-with-text__inner container {% if section.settings.layout == 'reverse' %}video-with-text__reverse{% endif %}">
+    {%- for block in section.blocks -%}
+      <div class="video-with-text__block video-with-text__block--{{ block.type }}" {{ block.shopify_attributes }}>
+        {%- case block.type -%}
 
-  {% style %}
-    .video-text-{{ video_section_id }} {
-      padding: {{ block.settings.padding_top }}px 0 {{ block.settings.padding_bottom }}px;
-      background-color: {{ block.settings.background_color }};
-    }
-
-    .video-text-container-{{ video_section_id }} {
-      max-width: {{ block.settings.container_width }}px;
-      margin: 0 auto;
-    }
-
-    .video-text-grid-{{ video_section_id }} {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: {{ block.settings.column_gap }}px;
-      align-items: center;
-    }
-
-    @media screen and (min-width: 750px) {
-      .video-text-grid-{{ video_section_id }} {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .video-text-grid-{{ video_section_id }}.video-text-reverse-{{ video_section_id }} {
-        direction: rtl;
-      }
-
-      .video-text-grid-{{ video_section_id }}.video-text-reverse-{{ video_section_id }} > * {
-        direction: ltr;
-      }
-    }
-
-    .video-text-video-wrapper-{{ video_section_id }} {
-      position: relative;
-      width: 100%;
-      padding-bottom: 100%;
-      overflow: hidden;
-      border-radius: {{ block.settings.video_border_radius }}px;
-      background-color: {{ block.settings.video_background }};
-    }
-
-    .video-text-video-{{ video_section_id }} {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .video-text-placeholder-{{ video_section_id }} {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-color: #f4f4f4;
-    }
-
-    .video-text-placeholder-{{ video_section_id }} svg {
-      width: 100%;
-      height: 100%;
-      max-width: 200px;
-      max-height: 200px;
-    }
-
-    .video-text-empty-state-{{ video_section_id }} {
-      position: absolute;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      padding: 12px 20px;
-      font-size: 14px;
-      color: #666;
-      text-align: center;
-      pointer-events: none;
-    }
-
-    .video-text-content-{{ video_section_id }} {
-      display: flex;
-      flex-direction: column;
-      gap: {{ block.settings.content_gap }}px;
-      text-align: {{ block.settings.text_alignment }};
-      padding: 0 {{ block.settings.content_padding }}px;
-    }
-
-    .video-text-eyebrow-{{ video_section_id }} {
-      margin: 0;
-      font-size: {{ block.settings.eyebrow_size }}px;
-      color: {{ block.settings.eyebrow_color }};
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      font-weight: 500;
-    }
-
-    .video-text-heading-{{ video_section_id }} {
-      margin: 0;
-      font-size: {{ block.settings.heading_size }}px;
-      color: {{ block.settings.heading_color }};
-      line-height: 1.2;
-      font-weight: 400;
-    }
-
-    .video-text-description-{{ video_section_id }} {
-      margin: 0;
-      font-size: {{ block.settings.text_size }}px;
-      color: {{ block.settings.text_color }};
-      line-height: 1.6;
-    }
-
-    .video-text-description-{{ video_section_id }} p {
-      margin: 0 0 1em;
-    }
-
-    .video-text-description-{{ video_section_id }} p:last-child {
-      margin-bottom: 0;
-    }
-
-    .video-text-button-{{ video_section_id }} {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: {{ block.settings.button_padding_vertical }}px {{ block.settings.button_padding_horizontal }}px;
-      background-color: {{ block.settings.button_background }};
-      color: {{ block.settings.button_text_color }};
-      border: {{ block.settings.button_border_width }}px solid {{ block.settings.button_border_color }};
-      border-radius: {{ block.settings.button_border_radius }}px;
-      font-size: {{ block.settings.button_text_size }}px;
-      text-decoration: none;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      font-weight: 500;
-    }
-
-    .video-text-button-{{ video_section_id }}:hover {
-      background-color: {{ block.settings.button_hover_background }};
-      color: {{ block.settings.button_hover_text_color }};
-      border-color: {{ block.settings.button_hover_border_color }};
-    }
-
-    .video-text-button-wrapper-{{ video_section_id }} {
-      {% if block.settings.text_alignment == 'left' %}
-        align-self: flex-start;
-      {% elsif block.settings.text_alignment == 'center' %}
-        align-self: center;
-      {% elsif block.settings.text_alignment == 'right' %}
-        align-self: flex-end;
-      {% endif %}
-    }
-
-    @media screen and (max-width: 749px) {
-      .video-text-heading-{{ video_section_id }} {
-        font-size: {{ block.settings.heading_size | times: 0.7 }}px;
-      }
-
-      .video-text-description-{{ video_section_id }} {
-        font-size: {{ block.settings.text_size | times: 0.9 }}px;
-      }
-
-      .video-text-eyebrow-{{ video_section_id }} {
-        font-size: {{ block.settings.eyebrow_size | times: 0.9 }}px;
-      }
-
-      .video-text-content-{{ video_section_id }} {
-        padding: 0;
-      }
-    }
-  {% endstyle %}
-
-  <div class="video-text-{{ video_section_id }}" {{ block.shopify_attributes }}>
-    <div class="video-text-container-{{ video_section_id }}">
-      <div class="video-text-grid-{{ video_section_id }} {% if block.settings.video_position == 'right' %}video-text-reverse-{{ video_section_id }}{% endif %}">
-        <div class="video-text-video-wrapper-{{ video_section_id }}">
-          {% if block.settings.video_url != blank %}
-            <video
-              class="video-text-video-{{ video_section_id }}"
-              {% if block.settings.autoplay %}autoplay{% endif %}
-              {% if block.settings.loop %}loop{% endif %}
-              {% if block.settings.muted %}muted{% endif %}
-              {% if block.settings.controls %}controls{% endif %}
-              playsinline
-            >
-              <source src="{{ block.settings.video_url }}" type="video/mp4">
-              Your browser does not support the video tag.
-            </video>
-          {% else %}
-            <div class="video-text-placeholder-{{ video_section_id }}">
-              {{ 'image' | placeholder_svg_tag }}
-              <div class="video-text-empty-state-{{ video_section_id }}">
-                Next, add a video URL
-              </div>
+          {%- when 'content' -%}
+            <div class="video-with-text__media">
+              {%- if block.settings.video_url != blank -%}
+                <div class="video-with-text__video-wrapper">
+                  <iframe
+                    src="{{ block.settings.video_url }}"
+                    frameborder="0"
+                    allow="autoplay; encrypted-media"
+                    allowfullscreen
+                    loading="lazy"
+                  ></iframe>
+                </div>
+              {%- endif -%}
             </div>
-          {% endif %}
-        </div>
 
-        <div class="video-text-content-{{ video_section_id }}">
-          {% if block.settings.eyebrow != blank %}
-            <p class="video-text-eyebrow-{{ video_section_id }}">{{ block.settings.eyebrow }}</p>
-          {% endif %}
-
-          {% if block.settings.heading != blank %}
-            <h2 class="video-text-heading-{{ video_section_id }}">{{ block.settings.heading }}</h2>
-          {% endif %}
-
-          {% if block.settings.description != blank %}
-            <div class="video-text-description-{{ video_section_id }}">
-              {{ block.settings.description }}
+            <div class="video-with-text__text">
+              {%- if block.settings.eyebrow != blank -%}
+                <p class="video-with-text__eyebrow">{{ block.settings.eyebrow }}</p>
+              {%- endif -%}
+              {%- if block.settings.heading != blank -%}
+                <h2 class="video-with-text__heading">{{ block.settings.heading }}</h2>
+              {%- endif -%}
+              {%- if block.settings.description != blank -%}
+                <div class="video-with-text__desc">{{ block.settings.description }}</div>
+              {%- endif -%}
+              {%- if block.settings.button_text != blank and block.settings.button_link != blank -%}
+                <a href="{{ block.settings.button_link }}" class="video-with-text__btn">
+                  {{ block.settings.button_text }}
+                </a>
+              {%- endif -%}
             </div>
-          {% endif %}
 
-          {% if block.settings.button_text != blank %}
-            <div class="video-text-button-wrapper-{{ video_section_id }}">
-              <a href="{{ block.settings.button_link }}" class="video-text-button-{{ video_section_id }}">
-                {{ block.settings.button_text }}
-              </a>
-            </div>
-          {% endif %}
-        </div>
+        {%- endcase -%}
       </div>
-    </div>
+    {%- endfor -%}
   </div>
-{% endfor %}
+
+  {%- style -%}
+  .video-with-text {
+    width: 100%;
+  }
+  .video-with-text__inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .video-with-text__reverse {
+    flex-direction: row-reverse;
+  }
+  .video-with-text__media iframe {
+    width: 100%;
+    max-width: 600px;
+    aspect-ratio: 16 / 9;
+    border: none;
+    border-radius: 10px;
+  }
+  .video-with-text__text {
+    max-width: 500px;
+  }
+  .video-with-text__eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+    color: #777;
+    margin-bottom: 0.5rem;
+  }
+  .video-with-text__heading {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  .video-with-text__desc {
+    color: #444;
+    margin-bottom: 1.5rem;
+  }
+  .video-with-text__btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background: #111;
+    color: #fff;
+    border-radius: 5px;
+    text-decoration: none;
+  }
+  {%- endstyle -%}
+</section>
 
 {% schema %}
 {
   "name": "Video with text",
-  "settings": [],
+  "settings": [
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout direction",
+      "options": [
+        { "value": "normal", "label": "Video left, text right" },
+        { "value": "reverse", "label": "Video right, text left" }
+      ],
+      "default": "normal"
+    }
+  ],
   "blocks": [
     {
-      "type": "video_text",
-      "name": "Video with text block",
+      "type": "content",
+      "name": "Video + text block",
       "settings": [
-        { "type": "header", "content": "Video" },
-        { "type": "url", "id": "video_url", "label": "Video URL" },
         {
-          "type": "select",
-          "id": "video_position",
-          "label": "Video position",
-          "options": [
-            { "value": "left", "label": "Left" },
-            { "value": "right", "label": "Right" }
-          ],
-          "default": "left"
+          "type": "text",
+          "id": "video_url",
+          "label": "Video URL (YouTube or Vimeo embed)"
         },
-        { "type": "color", "id": "video_background", "label": "Video background", "default": "#f5f5f5" },
-        { "type": "range", "id": "video_border_radius", "label": "Border radius", "min": 0, "max": 40, "step": 2, "unit": "px", "default": 12 },
-        { "type": "checkbox", "id": "autoplay", "label": "Autoplay", "default": true },
-        { "type": "checkbox", "id": "loop", "label": "Loop", "default": true },
-        { "type": "checkbox", "id": "muted", "label": "Muted", "default": true },
-        { "type": "checkbox", "id": "controls", "label": "Show controls", "default": false },
-
-        { "type": "header", "content": "Content" },
-        { "type": "text", "id": "eyebrow", "label": "Eyebrow text", "default": "Feature" },
-        { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "A superior carry-on handle" },
-        { "type": "richtext", "id": "description", "label": "Description", "default": "<p>Designed for comfort and durability...</p>" },
         {
-          "type": "select",
-          "id": "text_alignment",
-          "label": "Text alignment",
-          "options": [
-            { "value": "left", "label": "Left" },
-            { "value": "center", "label": "Center" },
-            { "value": "right", "label": "Right" }
-          ],
-          "default": "left"
+          "type": "text",
+          "id": "eyebrow",
+          "label": "Eyebrow text"
         },
-
-        { "type": "header", "content": "Button" },
-        { "type": "text", "id": "button_text", "label": "Button text" },
-        { "type": "url", "id": "button_link", "label": "Button link" },
-
-        { "type": "header", "content": "Layout" },
-        { "type": "range", "id": "container_width", "label": "Container width", "min": 600, "max": 2500, "step": 100, "unit": "px", "default": 1400 },
-        { "type": "range", "id": "column_gap", "label": "Column gap", "min": 0, "max": 120, "step": 10, "unit": "px", "default": 60 },
-        { "type": "range", "id": "content_gap", "label": "Content gap", "min": 10, "max": 50, "step": 5, "unit": "px", "default": 20 },
-        { "type": "range", "id": "content_padding", "label": "Content padding", "min": 0, "max": 100, "step": 10, "unit": "px", "default": 40 },
-        { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 120, "step": 10, "unit": "px", "default": 60 },
-        { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 120, "step": 10, "unit": "px", "default": 60 },
-
-        { "type": "header", "content": "Colors" },
-        { "type": "color", "id": "background_color", "label": "Background", "default": "#ffffff" },
-        { "type": "color", "id": "eyebrow_color", "label": "Eyebrow", "default": "#666666" },
-        { "type": "color", "id": "heading_color", "label": "Heading", "default": "#000000" },
-        { "type": "color", "id": "text_color", "label": "Text", "default": "#333333" },
-        { "type": "color", "id": "button_background", "label": "Button background", "default": "#ffffff" },
-        { "type": "color", "id": "button_text_color", "label": "Button text", "default": "#000000" },
-        { "type": "color", "id": "button_border_color", "label": "Button border", "default": "#000000" },
-        { "type": "color", "id": "button_hover_background", "label": "Button hover background", "default": "#000000" },
-        { "type": "color", "id": "button_hover_text_color", "label": "Button hover text", "default": "#ffffff" },
-        { "type": "color", "id": "button_hover_border_color", "label": "Button hover border", "default": "#000000" },
-
-        { "type": "header", "content": "Typography" },
-        { "type": "range", "id": "eyebrow_size", "label": "Eyebrow size", "min": 10, "max": 20, "step": 1, "unit": "px", "default": 12 },
-        { "type": "range", "id": "heading_size", "label": "Heading size", "min": 24, "max": 72, "step": 2, "unit": "px", "default": 40 },
-        { "type": "range", "id": "text_size", "label": "Text size", "min": 14, "max": 24, "step": 1, "unit": "px", "default": 16 },
-        { "type": "range", "id": "button_text_size", "label": "Button text size", "min": 12, "max": 20, "step": 1, "unit": "px", "default": 14 },
-        { "type": "range", "id": "button_padding_vertical", "label": "Button vertical padding", "min": 8, "max": 24, "step": 2, "unit": "px", "default": 12 },
-        { "type": "range", "id": "button_padding_horizontal", "label": "Button horizontal padding", "min": 16, "max": 60, "step": 4, "unit": "px", "default": 32 },
-        { "type": "range", "id": "button_border_radius", "label": "Button border radius", "min": 0, "max": 40, "step": 2, "unit": "px", "default": 4 },
-        { "type": "range", "id": "button_border_width", "label": "Button border width", "min": 0, "max": 4, "step": 1, "unit": "px", "default": 1 }
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button text"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        }
       ]
     }
   ],
-  "presets": [{ "name": "Video with text" }]
+  "max_blocks": 1,
+  "presets": [
+    {
+      "name": "Video with text",
+      "category": "Custom"
+    }
+  ]
 }
 {% endschema %}
