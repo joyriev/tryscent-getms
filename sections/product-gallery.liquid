@@ -2,39 +2,68 @@
          style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;
                 background-color: {{ section.settings.background_color }};">
   <div class="gallery-slider-container" style="max-width: {{ section.settings.max_width }}px; margin: 0 auto;">
-    <div class="gallery-slider" data-flickity='{
-         "wrapAround": true,
-         "cellAlign": "center",
-         "contain": true,
-         "pageDots": {{ section.settings.page_dots }},
-         "prevNextButtons": {{ section.settings.nav_buttons }},
-         "lazyLoad": 2
-       }'>
+    <div class="gallery-slider">
       {%- for block in section.blocks -%}
-        <div class="gallery-slide" {{ block.shopify_attributes }}
-             style="width: {{ section.settings.slide_width }}%;">
+        <div class="gallery-slide" {{ block.shopify_attributes }}>
           {% if block.settings.image != blank %}
             <img src="{{ block.settings.image | img_url: 'master' }}"
                  alt="{{ block.settings.alt | escape }}"
                  loading="lazy"
-                 style="width:100%; display:block; border-radius:{{ section.settings.border_radius }}px;" />
+                 style="border-radius: {{ section.settings.border_radius }}px; width: 100%; display: block;" />
           {% endif %}
         </div>
       {%- endfor -%}
     </div>
   </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var $gallery = $('#GallerySection-{{ section.id }} .gallery-slider');
+      if ($gallery.length && !$gallery.hasClass('slick-initialized')) {
+        $gallery.slick({
+          centerMode: true,
+          centerPadding: '{{ section.settings.center_padding }}%',
+          slidesToShow: 1,
+          infinite: true,
+          arrows: {{ section.settings.nav_buttons }},
+          dots: {{ section.settings.page_dots }},
+          autoplay: {{ section.settings.autoplay }},
+          autoplaySpeed: {{ section.settings.autoplay_speed }},
+          adaptiveHeight: true,
+          responsive: [
+            {
+              breakpoint: 768,
+              settings: {
+                centerPadding: '10%',
+              }
+            },
+            {
+              breakpoint: 480,
+              settings: {
+                centerPadding: '5%',
+              }
+            }
+          ]
+        });
+      }
+    });
+  </script>
 </section>
 
 {% style %}
 .gallery-slider-section {
-  position: relative;
+  overflow: hidden;
 }
-.gallery-slider .gallery-slide {
+.gallery-slide {
   padding: 0 {{ section.settings.slide_spacing }}px;
-  box-sizing: border-box;
 }
-.flickity-page-dots {
-  bottom: -30px;
+.slick-slide img {
+  transition: transform 0.4s ease, opacity 0.4s ease;
+  opacity: 0.8;
+}
+.slick-center img {
+  transform: scale(1.05);
+  opacity: 1;
 }
 {% endstyle %}
 
@@ -80,13 +109,13 @@
     },
     {
       "type": "range",
-      "id": "slide_width",
-      "label": "Slide width (% of container)",
-      "min": 50,
-      "max": 100,
-      "step": 5,
-      "unit": "%",
-      "default": 70
+      "id": "border_radius",
+      "label": "Image border radius (px)",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 12
     },
     {
       "type": "range",
@@ -100,13 +129,13 @@
     },
     {
       "type": "range",
-      "id": "border_radius",
-      "label": "Image border radius (px)",
+      "id": "center_padding",
+      "label": "Side image visibility (%)",
       "min": 0,
-      "max": 40,
-      "step": 2,
-      "unit": "px",
-      "default": 12
+      "max": 30,
+      "step": 1,
+      "unit": "%",
+      "default": 15
     },
     {
       "type": "checkbox",
@@ -117,14 +146,29 @@
     {
       "type": "checkbox",
       "id": "nav_buttons",
-      "label": "Show prev/next buttons",
+      "label": "Show prev/next arrows",
       "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Enable autoplay",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "label": "Autoplay speed (ms)",
+      "min": 1000,
+      "max": 9000,
+      "step": 500,
+      "default": 4000
     }
   ],
   "blocks": [
     {
       "type": "image",
-      "name": "Image slide",
+      "name": "Image Slide",
       "settings": [
         {
           "type": "image_picker",
