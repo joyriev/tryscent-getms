@@ -1,104 +1,288 @@
-<section
-  id="{{ section.id }}"
-  class="video-with-text"
-  style="
-    padding-top: {{ section.settings.padding_top }}px;
-    padding-bottom: {{ section.settings.padding_bottom }}px;
-    background-color: {{ section.settings.background_color }};
-  "
->
-  <div class="video-with-text__inner container {% if section.settings.layout == 'reverse' %}video-with-text__reverse{% endif %}">
-    {%- for block in section.blocks -%}
-      <div class="video-with-text__block video-with-text__block--{{ block.type }}" {{ block.shopify_attributes }}>
-        {%- case block.type -%}
+{% comment %}
+  sections/video-with-text.liquid
+  - Section-level: all styling/layout settings (moved here)
+  - Block-level: only content fields (video_url, video_position, eyebrow, heading, description, button_text, button_link)
+  - Renders multiple blocks (each block is a video+text pair)
+{% endcomment %}
 
-          {%- when 'content' -%}
-            <div class="video-with-text__media">
-              {%- if block.settings.video_url != blank -%}
-                <div class="video-with-text__video-wrapper">
-                  <iframe
-                    src="{{ block.settings.video_url }}"
-                    frameborder="0"
-                    allow="autoplay; encrypted-media"
-                    allowfullscreen
-                    loading="lazy"
-                  ></iframe>
-                </div>
-              {%- endif -%}
-            </div>
-
-            <div class="video-with-text__text">
-              {%- if block.settings.eyebrow != blank -%}
-                <p class="video-with-text__eyebrow">{{ block.settings.eyebrow }}</p>
-              {%- endif -%}
-              {%- if block.settings.heading != blank -%}
-                <h2 class="video-with-text__heading">{{ block.settings.heading }}</h2>
-              {%- endif -%}
-              {%- if block.settings.description != blank -%}
-                <div class="video-with-text__desc">{{ block.settings.description }}</div>
-              {%- endif -%}
-              {%- if block.settings.button_text != blank and block.settings.button_link != blank -%}
-                <a href="{{ block.settings.button_link }}" class="video-with-text__btn">
-                  {{ block.settings.button_text }}
-                </a>
-              {%- endif -%}
-            </div>
-
-        {%- endcase -%}
-      </div>
-    {%- endfor -%}
-  </div>
+{%- for block in section.blocks -%}
+  {% assign video_section_id = block.id | replace: '_', '' | downcase %}
 
   {%- style -%}
-  .video-with-text {
-    width: 100%;
-  }
-  .video-with-text__inner {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 2rem;
-    flex-wrap: wrap;
-  }
-  .video-with-text__reverse {
-    flex-direction: row-reverse;
-  }
-  .video-with-text__media iframe {
-    width: 100%;
-    max-width: 600px;
-    aspect-ratio: 16 / 9;
-    border: none;
-    border-radius: 10px;
-  }
-  .video-with-text__text {
-    max-width: 500px;
-  }
-  .video-with-text__eyebrow {
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    font-weight: 600;
-    color: #777;
-    margin-bottom: 0.5rem;
-  }
-  .video-with-text__heading {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-  }
-  .video-with-text__desc {
-    color: #444;
-    margin-bottom: 1.5rem;
-  }
-  .video-with-text__btn {
-    display: inline-block;
-    padding: 0.75rem 1.5rem;
-    background: #111;
-    color: #fff;
-    border-radius: 5px;
-    text-decoration: none;
-  }
-  {%- endstyle -%}
-</section>
+    /* Section-controlled layout & theme styles (applied per-block with unique id) */
+    .video-text-{{ video_section_id }} {
+      padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+      background-color: {{ section.settings.background_color }};
+    }
 
+    .video-text-container-{{ video_section_id }} {
+      max-width: {{ section.settings.container_width }}px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    .video-text-grid-{{ video_section_id }} {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: {{ section.settings.column_gap }}px;
+      align-items: center;
+    }
+
+    @media screen and (min-width: 750px) {
+      .video-text-grid-{{ video_section_id }} {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .video-text-grid-{{ video_section_id }}.video-text-reverse-{{ video_section_id }} {
+        direction: rtl;
+      }
+
+      .video-text-grid-{{ video_section_id }}.video-text-reverse-{{ video_section_id }} > * {
+        direction: ltr;
+      }
+    }
+
+    .video-text-video-wrapper-{{ video_section_id }} {
+      position: relative;
+      width: 100%;
+      padding-bottom: {{ section.settings.video_aspect_ratio_height }}%;
+      overflow: hidden;
+      border-radius: {{ section.settings.video_border_radius }}px;
+      background-color: {{ section.settings.video_background }};
+    }
+
+    .video-text-video-{{ video_section_id }},
+    .video-text-video-{{ video_section_id }} iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border: 0;
+      display: block;
+    }
+
+    .video-text-placeholder-{{ video_section_id }} {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #f4f4f4;
+    }
+
+    .video-text-empty-state-{{ video_section_id }} {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 8px 12px;
+      font-size: 13px;
+      color: #666;
+      text-align: center;
+      pointer-events: none;
+      background: rgba(255,255,255,0.9);
+      border-radius: 6px;
+    }
+
+    .video-text-content-{{ video_section_id }} {
+      display: flex;
+      flex-direction: column;
+      gap: {{ section.settings.content_gap }}px;
+      text-align: {{ section.settings.text_alignment }};
+      padding: 0 {{ section.settings.content_padding }}px;
+    }
+
+    .video-text-eyebrow-{{ video_section_id }} {
+      margin: 0;
+      font-size: {{ section.settings.eyebrow_size }}px;
+      color: {{ section.settings.eyebrow_color }};
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 600;
+    }
+
+    .video-text-heading-{{ video_section_id }} {
+      margin: 0;
+      font-size: {{ section.settings.heading_size }}px;
+      color: {{ section.settings.heading_color }};
+      line-height: 1.15;
+      font-weight: 700;
+    }
+
+    .video-text-description-{{ video_section_id }} {
+      margin: 0;
+      font-size: {{ section.settings.text_size }}px;
+      color: {{ section.settings.text_color }};
+      line-height: 1.6;
+    }
+
+    .video-text-description-{{ video_section_id }} p {
+      margin: 0 0 1em;
+    }
+
+    .video-text-button-{{ video_section_id }} {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: {{ section.settings.button_padding_vertical }}px {{ section.settings.button_padding_horizontal }}px;
+      background-color: {{ section.settings.button_background }};
+      color: {{ section.settings.button_text_color }};
+      border: {{ section.settings.button_border_width }}px solid {{ section.settings.button_border_color }};
+      border-radius: {{ section.settings.button_border_radius }}px;
+      font-size: {{ section.settings.button_text_size }}px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      font-weight: 600;
+    }
+
+    .video-text-button-{{ video_section_id }}:hover {
+      background-color: {{ section.settings.button_hover_background }};
+      color: {{ section.settings.button_hover_text_color }};
+      border-color: {{ section.settings.button_hover_border_color }};
+    }
+
+    .video-text-button-wrapper-{{ video_section_id }} {
+      {% if section.settings.text_alignment == 'left' %}
+        align-self: flex-start;
+      {% elsif section.settings.text_alignment == 'center' %}
+        align-self: center;
+      {% elsif section.settings.text_alignment == 'right' %}
+        align-self: flex-end;
+      {% endif %}
+    }
+
+    @media screen and (max-width: 749px) {
+      .video-text-heading-{{ video_section_id }} {
+        font-size: {{ section.settings.heading_size | times: 0.7 }}px;
+      }
+
+      .video-text-description-{{ video_section_id }} {
+        font-size: {{ section.settings.text_size | times: 0.9 }}px;
+      }
+
+      .video-text-eyebrow-{{ video_section_id }} {
+        font-size: {{ section.settings.eyebrow_size | times: 0.9 }}px;
+      }
+
+      .video-text-content-{{ video_section_id }} {
+        padding: 0;
+      }
+    }
+  {%- endstyle -%}
+
+  <div class="video-text-{{ video_section_id }}" {{ block.shopify_attributes }}>
+    <div class="video-text-container-{{ video_section_id }}">
+      <div class="video-text-grid-{{ video_section_id }} {% if block.settings.video_position == 'right' %}video-text-reverse-{{ video_section_id }}{% endif %}">
+        <div class="video-text-video-wrapper-{{ video_section_id }}">
+          {% if block.settings.video_url != blank %}
+            {%- assign url = block.settings.video_url -%}
+            {%- comment -%}
+              Basic YouTube/Vimeo detection & embed handling. If it's a direct MP4 URL, use <video>.
+            {%- endcomment -%}
+
+            {% if url contains 'youtube.com' or url contains 'youtu.be' %}
+              {%- assign yt_id = url | split: 'v=' | last | split: '&' | first -%}
+              {%- if yt_id == url -%}
+                {%- assign yt_id = url | split: '/' | last -%}
+              {%- endif -%}
+              <iframe
+                class="video-text-video-{{ video_section_id }}"
+                src="https://www.youtube.com/embed/{{ yt_id }}?rel=0&modestbranding=1"
+                title="{{ block.settings.heading | default: 'Video' }}"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+                loading="lazy"
+              ></iframe>
+
+            {% elsif url contains 'vimeo.com' %}
+              {%- assign vimeo_id = url | split: '/' | last -%}
+              <iframe
+                class="video-text-video-{{ video_section_id }}"
+                src="https://player.vimeo.com/video/{{ vimeo_id }}"
+                title="{{ block.settings.heading | default: 'Video' }}"
+                frameborder="0"
+                allow="autoplay; fullscreen; picture-in-picture"
+                allowfullscreen
+                loading="lazy"
+              ></iframe>
+
+            {% elsif url contains '.mp4' %}
+              <video
+                class="video-text-video-{{ video_section_id }}"
+                {% if section.settings.autoplay %}
+                  autoplay
+                {% endif %}
+                {% if section.settings.loop %}
+                  loop
+                {% endif %}
+                {% if section.settings.muted %}
+                  muted
+                {% endif %}
+                {% if section.settings.controls %}
+                  controls
+                {% endif %}
+                playsinline
+              >
+                <source src="{{ url }}" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            {% else %}
+              {%- comment -%} fallback: embed URL in iframe (useful for other providers) {%- endcomment -%}
+              <iframe
+                class="video-text-video-{{ video_section_id }}"
+                src="{{ url }}"
+                title="{{ block.settings.heading | default: 'Video' }}"
+                frameborder="0"
+                allow="autoplay; encrypted-media"
+                allowfullscreen
+                loading="lazy"
+              ></iframe>
+            {% endif %}
+
+          {% else %}
+            <div class="video-text-placeholder-{{ video_section_id }}">
+              {{ 'image' | placeholder_svg_tag }}
+              <div class="video-text-empty-state-{{ video_section_id }}">Add a video URL in the block settings</div>
+            </div>
+          {% endif %}
+        </div>
+
+        <div class="video-text-content-{{ video_section_id }}">
+          {% if block.settings.eyebrow != blank %}
+            <p class="video-text-eyebrow-{{ video_section_id }}">{{ block.settings.eyebrow }}</p>
+          {% endif %}
+
+          {% if block.settings.heading != blank %}
+            <h2 class="video-text-heading-{{ video_section_id }}">{{ block.settings.heading }}</h2>
+          {% endif %}
+
+          {% if block.settings.description != blank %}
+            <div class="video-text-description-{{ video_section_id }}">
+              {{ block.settings.description }}
+            </div>
+          {% endif %}
+
+          {% if block.settings.button_text != blank %}
+            <div class="video-text-button-wrapper-{{ video_section_id }}">
+              <a href="{{ block.settings.button_link }}" class="video-text-button-{{ video_section_id }}">
+                {{ block.settings.button_text }}
+              </a>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+{%- endfor -%}
+
+{%- comment -%} Schema: section-level style settings + simple block content settings {%- endcomment -%}
 {% schema %}
 {
   "name": "Video with text",
@@ -109,7 +293,7 @@
       "label": "Padding top",
       "min": 0,
       "max": 200,
-      "step": 10,
+      "step": 5,
       "unit": "px",
       "default": 60
     },
@@ -119,66 +303,215 @@
       "label": "Padding bottom",
       "min": 0,
       "max": 200,
-      "step": 10,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    },
+    { "type": "color", "id": "background_color", "label": "Background color", "default": "#ffffff" },
+
+    {
+      "type": "range",
+      "id": "container_width",
+      "label": "Container max width",
+      "min": 600,
+      "max": 3000,
+      "step": 50,
+      "unit": "px",
+      "default": 1400
+    },
+    {
+      "type": "range",
+      "id": "column_gap",
+      "label": "Column gap (px)",
+      "min": 0,
+      "max": 120,
+      "step": 5,
       "unit": "px",
       "default": 60
     },
     {
-      "type": "color",
-      "id": "background_color",
-      "label": "Background color",
-      "default": "#ffffff"
+      "type": "range",
+      "id": "content_gap",
+      "label": "Content gap (px)",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 20
     },
     {
+      "type": "range",
+      "id": "content_padding",
+      "label": "Content side padding (px)",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+
+    {
       "type": "select",
-      "id": "layout",
-      "label": "Layout direction",
+      "id": "text_alignment",
+      "label": "Default text alignment",
       "options": [
-        { "value": "normal", "label": "Video left, text right" },
-        { "value": "reverse", "label": "Video right, text left" }
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
       ],
-      "default": "normal"
+      "default": "left"
+    },
+
+    {
+      "type": "range",
+      "id": "video_border_radius",
+      "label": "Video border radius (px)",
+      "min": 0,
+      "max": 80,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    { "type": "color", "id": "video_background", "label": "Video background", "default": "#f5f5f5" },
+    {
+      "type": "range",
+      "id": "video_aspect_ratio_height",
+      "label": "Video aspect ratio height (%) (for padding-bottom)",
+      "min": 40,
+      "max": 80,
+      "step": 1,
+      "unit": "%",
+      "default": 56
+    },
+
+    { "type": "checkbox", "id": "autoplay", "label": "Autoplay MP4 videos", "default": true },
+    { "type": "checkbox", "id": "loop", "label": "Loop MP4 videos", "default": true },
+    { "type": "checkbox", "id": "muted", "label": "Mute MP4 videos", "default": true },
+    { "type": "checkbox", "id": "controls", "label": "Show video controls for MP4", "default": false },
+
+    { "type": "header", "content": "Typography / Colors" },
+    {
+      "type": "range",
+      "id": "eyebrow_size",
+      "label": "Eyebrow size (px)",
+      "min": 8,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    { "type": "color", "id": "eyebrow_color", "label": "Eyebrow color", "default": "#777777" },
+
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size (px)",
+      "min": 18,
+      "max": 72,
+      "step": 1,
+      "unit": "px",
+      "default": 40
+    },
+    { "type": "color", "id": "heading_color", "label": "Heading color", "default": "#111111" },
+
+    {
+      "type": "range",
+      "id": "text_size",
+      "label": "Text size (px)",
+      "min": 12,
+      "max": 26,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    { "type": "color", "id": "text_color", "label": "Text color", "default": "#333333" },
+
+    { "type": "header", "content": "Button styling" },
+    { "type": "color", "id": "button_background", "label": "Button background", "default": "#111111" },
+    { "type": "color", "id": "button_text_color", "label": "Button text color", "default": "#ffffff" },
+    { "type": "color", "id": "button_border_color", "label": "Button border color", "default": "#111111" },
+    { "type": "color", "id": "button_hover_background", "label": "Button hover background", "default": "#000000" },
+    { "type": "color", "id": "button_hover_text_color", "label": "Button hover text color", "default": "#ffffff" },
+    { "type": "color", "id": "button_hover_border_color", "label": "Button hover border color", "default": "#000000" },
+
+    {
+      "type": "range",
+      "id": "button_text_size",
+      "label": "Button text size (px)",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "button_padding_vertical",
+      "label": "Button vertical padding (px)",
+      "min": 4,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "button_padding_horizontal",
+      "label": "Button horizontal padding (px)",
+      "min": 8,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "label": "Button border radius (px)",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 6
+    },
+    {
+      "type": "range",
+      "id": "button_border_width",
+      "label": "Button border width (px)",
+      "min": 0,
+      "max": 6,
+      "step": 1,
+      "unit": "px",
+      "default": 1
     }
   ],
+
   "blocks": [
     {
-      "type": "content",
-      "name": "Video + text block",
+      "type": "video_text",
+      "name": "Video with text",
       "settings": [
+        { "type": "text", "id": "video_url", "label": "Video URL (YouTube, Vimeo or direct .mp4)" },
         {
-          "type": "text",
-          "id": "video_url",
-          "label": "Video URL (YouTube or Vimeo embed)"
+          "type": "select",
+          "id": "video_position",
+          "label": "Video position (per block)",
+          "options": [
+            { "value": "left", "label": "Left" },
+            { "value": "right", "label": "Right" }
+          ],
+          "default": "left"
         },
-        {
-          "type": "text",
-          "id": "eyebrow",
-          "label": "Eyebrow text"
-        },
-        {
-          "type": "text",
-          "id": "heading",
-          "label": "Heading"
-        },
-        {
-          "type": "textarea",
-          "id": "description",
-          "label": "Description"
-        },
-        {
-          "type": "text",
-          "id": "button_text",
-          "label": "Button text"
-        },
-        {
-          "type": "url",
-          "id": "button_link",
-          "label": "Button link"
-        }
+        { "type": "text", "id": "eyebrow", "label": "Eyebrow text" },
+        { "type": "text", "id": "heading", "label": "Heading" },
+        { "type": "richtext", "id": "description", "label": "Description" },
+        { "type": "text", "id": "button_text", "label": "Button text" },
+        { "type": "url", "id": "button_link", "label": "Button link" }
       ]
     }
   ],
-  "max_blocks": 1,
+
+  "max_blocks": 5,
   "presets": [
     {
       "name": "Video with text",
