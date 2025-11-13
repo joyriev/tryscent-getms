@@ -9,35 +9,6 @@
  */
 {
   "sections": {
-    "17630467631baf3005": {
-      "type": "_blocks",
-      "blocks": {
-        "ai_gen_block_5fadefc_JVWgnW": {
-          "type": "ai_gen_block_5fadefc",
-          "settings": {
-            "container_width": 1200,
-            "columns_desktop": 3,
-            "columns_mobile": "2",
-            "gap": 8,
-            "image_ratio": "3/4",
-            "show_dots": true,
-            "section_padding_top": 40,
-            "section_padding_bottom": 40,
-            "background_color": "#ffffff",
-            "image_1": "shopify://shop_images/PDP_Lifestyle_Carousel_Collectio.jpg",
-            "image_2": "shopify://shop_images/pdp_lifestylecarousel-1_1_720x_ba5c92d8-13bd-47c4-a6db-1bf1b3772d55.jpg",
-            "image_3": "shopify://shop_images/PDP_Lifestyle_Carousel_Collectio.jpg",
-            "image_4": "shopify://shop_images/pdp_lifestylecarousel-1_1_720x_ba5c92d8-13bd-47c4-a6db-1bf1b3772d55.jpg",
-            "image_5": "shopify://shop_images/PDP_Lifestyle_Carousel_Collectio.jpg"
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "ai_gen_block_5fadefc_JVWgnW"
-      ],
-      "settings": {}
-    },
     "main": {
       "type": "main-product",
       "blocks": {
@@ -309,7 +280,6 @@
     }
   },
   "order": [
-    "17630467631baf3005",
     "main",
     "marquee_labels_dpeY47",
     "video_with_text_cpMzDz",
