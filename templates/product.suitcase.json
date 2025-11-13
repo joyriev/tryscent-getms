@@ -294,7 +294,7 @@
         "text_alignment": "left",
         "video_border_radius": 0,
         "video_background": "#f5f5f5",
-        "video_aspect_ratio_height": 56,
+        "video_aspect_ratio_height": 80,
         "autoplay": true,
         "loop": true,
         "muted": true,
