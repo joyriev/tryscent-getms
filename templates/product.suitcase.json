@@ -9,6 +9,35 @@
  */
 {
   "sections": {
+    "17630467631baf3005": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_5fadefc_JVWgnW": {
+          "type": "ai_gen_block_5fadefc",
+          "settings": {
+            "container_width": 1200,
+            "columns_desktop": 3,
+            "columns_mobile": "2",
+            "gap": 8,
+            "image_ratio": "3/4",
+            "show_dots": true,
+            "section_padding_top": 40,
+            "section_padding_bottom": 40,
+            "background_color": "#ffffff",
+            "image_1": "shopify://shop_images/Camouflage_3-Piece_Hard-Shell_Spinner_Luggage_Set.png",
+            "image_2": "shopify://shop_images/PP_AeroShield_Hard-Shell_Travel_Trio.png",
+            "image_3": "shopify://shop_images/Camouflage_3-Piece_Hard-Shell_Spinner_Luggage_Set.png",
+            "image_4": "shopify://shop_images/PP_3-Piece_Hard-Shell_TSA_Spinner_Luggage_Set.png",
+            "image_5": "shopify://shop_images/Aluminum_Frame_3-Piece_Color-Match_Spinner_Luggage_Set.png"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_5fadefc_JVWgnW"
+      ],
+      "settings": {}
+    },
     "main": {
       "type": "main-product",
       "blocks": {
@@ -280,6 +309,7 @@
     }
   },
   "order": [
+    "17630467631baf3005",
     "main",
     "marquee_labels_dpeY47",
     "video_with_text_cpMzDz",
