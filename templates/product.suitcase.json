@@ -247,6 +247,7 @@
         "image_dPpVmU",
         "image_aG3H8b"
       ],
+      "disabled": true,
       "name": "Product Gallery",
       "settings": {
         "background_color": "#f9f9f9",
@@ -301,6 +302,7 @@
         "column_WAr94x",
         "column_HMbDFn"
       ],
+      "disabled": true,
       "name": "t:sections.multicolumn.presets.name",
       "settings": {
         "title": "",
