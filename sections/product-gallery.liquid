@@ -1,53 +1,40 @@
-<div class="gallery-section" id="Gallery-{{ section.id }}">
-  <div
-    class="gallery-slider"
-    data-flickity='{
-      "wrapAround": true,
-      "pageDots": true,
-      "contain": true,
-      "prevNextButtons": true,
-      "lazyLoad": true,
-      "cellAlign": "center"
-    }'
-  >
-    {% for block in section.blocks %}
-      {% if block.settings.image != blank %}
-        <div class="gallery-slide" {{ block.shopify_attributes }}>
-          <img
-            src="{{ block.settings.image | img_url: 'master' }}"
-            alt="{{ block.settings.alt | escape }}"
-            loading="lazy"
-          >
+<section id="GallerySection-{{ section.id }}" class="gallery-slider-section"
+         style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;
+                background-color: {{ section.settings.background_color }};">
+  <div class="gallery-slider-container" style="max-width: {{ section.settings.max_width }}px; margin: 0 auto;">
+    <div class="gallery-slider" data-flickity='{
+         "wrapAround": true,
+         "cellAlign": "center",
+         "contain": true,
+         "pageDots": {{ section.settings.page_dots }},
+         "prevNextButtons": {{ section.settings.nav_buttons }},
+         "lazyLoad": 2
+       }'>
+      {%- for block in section.blocks -%}
+        <div class="gallery-slide" {{ block.shopify_attributes }}
+             style="width: {{ section.settings.slide_width }}%;">
+          {% if block.settings.image != blank %}
+            <img src="{{ block.settings.image | img_url: 'master' }}"
+                 alt="{{ block.settings.alt | escape }}"
+                 loading="lazy"
+                 style="width:100%; display:block; border-radius:{{ section.settings.border_radius }}px;" />
+          {% endif %}
         </div>
-      {% endif %}
-    {% endfor %}
+      {%- endfor -%}
+    </div>
   </div>
-</div>
+</section>
 
 {% style %}
-.gallery-section {
-  background-color: {{ section.settings.background_color }};
-  padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+.gallery-slider-section {
+  position: relative;
 }
-
-.gallery-slider {
-  width: 100%;
-  max-width: {{ section.settings.max_width }}px;
-  margin: 0 auto;
+.gallery-slider .gallery-slide {
+  padding: 0 {{ section.settings.slide_spacing }}px;
+  box-sizing: border-box;
 }
-
-.gallery-slide {
-  width: 70%;
-  margin: 0 10px;
-  overflow: hidden;
-  border-radius: {{ section.settings.border_radius }}px;
-}
-
-.gallery-slide img {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: inherit;
+.flickity-page-dots {
+  bottom: -30px;
 }
 {% endstyle %}
 
@@ -58,54 +45,86 @@
     {
       "type": "color",
       "id": "background_color",
-      "label": "Background color",
-      "default": "#f9f9f9"
+      "label": "Background colour",
+      "default": "#ffffff"
     },
     {
       "type": "range",
       "id": "padding_top",
-      "label": "Padding top",
+      "label": "Padding top (px)",
       "min": 0,
-      "max": 120,
+      "max": 200,
       "step": 10,
-      "default": 60,
-      "unit": "px"
+      "unit": "px",
+      "default": 60
     },
     {
       "type": "range",
       "id": "padding_bottom",
-      "label": "Padding bottom",
+      "label": "Padding bottom (px)",
       "min": 0,
-      "max": 120,
+      "max": 200,
       "step": 10,
-      "default": 60,
-      "unit": "px"
+      "unit": "px",
+      "default": 60
     },
     {
       "type": "range",
       "id": "max_width",
-      "label": "Container width",
+      "label": "Container max width (px)",
       "min": 600,
-      "max": 2500,
-      "step": 100,
-      "default": 1400,
-      "unit": "px"
+      "max": 3000,
+      "step": 50,
+      "unit": "px",
+      "default": 1400
+    },
+    {
+      "type": "range",
+      "id": "slide_width",
+      "label": "Slide width (% of container)",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 70
+    },
+    {
+      "type": "range",
+      "id": "slide_spacing",
+      "label": "Spacing between slides (px)",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 20
     },
     {
       "type": "range",
       "id": "border_radius",
-      "label": "Image border radius",
+      "label": "Image border radius (px)",
       "min": 0,
       "max": 40,
       "step": 2,
-      "default": 12,
-      "unit": "px"
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "checkbox",
+      "id": "page_dots",
+      "label": "Show page dots",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "nav_buttons",
+      "label": "Show prev/next buttons",
+      "default": true
     }
   ],
   "blocks": [
     {
       "type": "image",
-      "name": "Gallery image",
+      "name": "Image slide",
       "settings": [
         {
           "type": "image_picker",
@@ -120,9 +139,11 @@
       ]
     }
   ],
+  "max_blocks": 20,
   "presets": [
     {
-      "name": "Product Gallery"
+      "name": "Product Gallery",
+      "category": "Media"
     }
   ]
 }
