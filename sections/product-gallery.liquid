@@ -65,33 +65,24 @@
   align-items: center;
 }
 
-/* ✅ Force all slides to equal height */
-.gallery-slider .slick-list {
-  display: flex;
-  align-items: center;
-  height: 75vh; /* same as Monos layout */
-  max-height: 900px;
-  min-height: 500px;
-}
-
-/* ✅ Slick track & slides keep alignment centered */
 .gallery-slider .slick-track {
   display: flex !important;
-  align-items: center;
+  align-items: center; /* ✅ Centers smaller images vertically */
 }
 
 .gallery-slide {
   padding: 0 {{ section.settings.slide_spacing }}px;
   display: flex !important;
-  align-items: center;
   justify-content: center;
-  height: 100%;
+  align-items: center;
 }
 
-/* ✅ Images are centered vertically, large ones fill height */
+/* ✅ Image: natural size only */
 .gallery-slide img {
-  height: 100%;
-  width: auto;
+  height: auto;             /* keep original height */
+  width: auto;              /* natural width */
+  max-width: 100%;          /* don’t overflow container */
+  max-height: 90vh;         /* prevent overly tall images */
   object-fit: contain;
   border-radius: {{ section.settings.border_radius }}px;
   transition: transform 0.4s ease, opacity 0.4s ease;
@@ -100,17 +91,23 @@
   margin: 0 auto;
 }
 
-/* ✅ Active (center) image pops out */
+/* ✅ Highlight center slide only */
 .slick-center img {
   transform: scale(1.05);
   opacity: 1;
 }
 
-/* ✅ Fix mobile scaling */
+/* ✅ Keep vertical alignment consistent */
+.slick-slide {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ✅ Mobile adjustments */
 @media (max-width: 768px) {
-  .gallery-slider .slick-list {
-    height: 55vh;
-    min-height: 350px;
+  .gallery-slide img {
+    max-height: 70vh;
   }
 }
 {% endstyle %}
