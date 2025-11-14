@@ -16,7 +16,6 @@ document.addEventListener("DOMContentLoaded", function() {
   const selectOptions = selectBox.querySelector('.select-options');
   const optionItems = selectBox.querySelectorAll('.select-options li');
 
-  // 🔥 Event delegation for ANY future .select-label
 // global delegated listener (no DOMContentLoaded needed)
 document.addEventListener('click', function (e) {
   // find the label no matter if you clicked the label or a child inside it
