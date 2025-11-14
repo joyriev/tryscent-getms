@@ -13,42 +13,44 @@
 <script>
 document.addEventListener("DOMContentLoaded", function() {
   const selectBox = document.querySelector('.custom-select');
-  const selectLabel = selectBox.querySelector('.select-label');
   const selectOptions = selectBox.querySelector('.select-options');
   const optionItems = selectBox.querySelectorAll('.select-options li');
 
-  // Toggle dropdown
-  document.querySelector('body').addEventListener('click', (e) => {
-    if (e.target.closest('.select-label')) {
-     selectOptions.style.display = 
-      selectOptions.style.display === 'block' ? 'none' : 'block';
-      selectLabel.classList.toggle('active');
-    }
-   
+  // 🔥 Event delegation for ANY future .select-label
+  document.body.addEventListener('click', (e) => {
+    const clickedLabel = e.target.closest('.select-label');
 
+    if (clickedLabel) {
+      // If clicked on appended label
+      const currentLabel = selectBox.querySelector('.select-label');
+
+      currentLabel.classList.toggle('active');
+
+      selectOptions.style.display =
+        selectOptions.style.display === 'block' ? 'none' : 'block';
+    }
   });
 
   // On clicking an option (li)
   optionItems.forEach(li => {
     li.addEventListener('click', () => {
-      // 1. Update label
-      selectLabel.textContent = li.textContent;
+      const currentLabel = selectBox.querySelector('.select-label');
+      currentLabel.textContent = li.textContent;
 
-      // 2. Read product URL
-      let url = li.getAttribute('data-url');
-
-      // 3. Redirect to product page
-      window.location.href = url;
+      window.location.href = li.getAttribute('data-url');
     });
   });
 
-  // Close when clicking outside
+  // Close outside
   document.addEventListener('click', (e) => {
     if (!e.target.closest('.custom-select')) {
+      const currentLabel = selectBox.querySelector('.select-label');
+      currentLabel.classList.remove('active');
       selectOptions.style.display = 'none';
     }
   });
 });
+
 </script>
 
 <style>
