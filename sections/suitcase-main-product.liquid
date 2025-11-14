@@ -27,7 +27,7 @@
 
   {%- style -%}
     .section-{{ section.id }}-padding {
-      padding-top: 0px;
+      padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
       padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
     }
 
@@ -74,8 +74,8 @@
 
   {% assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src' %}
   <div class="page-width">
-    <div style="display: flex;" class="product product--{{ section.settings.media_size }} product--{{ section.settings.media_position }} product--{{ section.settings.gallery_layout }} product--mobile-{{ section.settings.mobile_thumbnails }} grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
-      <div class="grid__item product__media-wrapper pb-6">
+    <div class="product product--{{ section.settings.media_size }} product--{{ section.settings.media_position }} product--{{ section.settings.gallery_layout }} product--mobile-{{ section.settings.mobile_thumbnails }} grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
+      <div class="grid__item product__media-wrapper">
         {% render 'product-media-gallery', variant_images: variant_images %}
       </div>
       <div class="product__info-wrapper grid__item{% if settings.page_width > 1400 and section.settings.media_size == "small" %} product__info-wrapper--extra-padding{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
@@ -89,186 +89,29 @@
             {%- case block.type -%}
               {%- when '@app' -%}
                 {% render block %}
-              {% when 'inspired_by' %}
-                <div class="line-clamp-1 relative !-my-2">
-                  <span class="italic tracking-tighter">Inspired by</span> <a href="/search?q={{ product.metafields.custom.forgaylawyers | url_encode }}" class="font-semibold text-lg not-italic tracking-tight text-gray-900 ![text-decoration:none]">{{ product.metafields.custom.forgaylawyers }}</a>
-                </div>
-              {% when 'cheaper_than' %}
-                <div>
-                  {% if product.metafields.custom.nuta  != blank and product.metafields.custom.choose_your_fragrances_options == blank %}
-                    {% assign nuta_list = product.metafields.custom.nuta | split: "," %}
-                    <div class="text-black"><span class="italic">Inspired by: </span> <span class="font-semibold">{{ nuta_list[0] }}</span> <span>{{ nuta_list[1] }}</span></div>
-                  {% endif %}
-                  {% if product.metafields.custom.original_retail_price != blank %}
-                    <div>(Retail Price {{ product.metafields.custom.original_retail_price.value | money }})</div>
-                  {% endif %}
-                  {% if product.metafields.custom.scent_intensity != blank %}
-                    <div class="flex items-center gap-[5px]">
-                    Scent Intensity Scale: <span class="text-highlight leading-4">Statement</span>
-                    {% assign intensity = product.metafields.custom.scent_intensity.value | times: 1 %}
-                    <div class="flex gap-[5px] items-center justify-center ml-1">
-                        {% for i in (1..3) %}
-                            <div class="w-[8px] h-[8px] rounded-full {% if i <= intensity %}bg-[#22613A]{% else %}bg-gray-300{% endif %} !inline-block"></div>
-                        {% endfor %}
-                    </div>
-                  </div>
-                  {% endif %}
-                </div>
-                {% if product.metafields.custom.bundle_product_content != blank %}
-                  <div class="flex items-center gap-1 font-normal text-black leading-[normal]">
-                    <span class="cheaper_than_text" style="font-size: 14px; line-height: normal;">{{ product.metafields.custom.bundle_product_content }}</span> 
-                  </div>
-                {% endif %}
-                {% if product.tags contains 'Bundle_Price_Show' %}
-                  <div id="price-{{ section.id }}" class="bundle-price-pdp pb-3" role="status" {{ block.shopify_attributes }}>
-                    {% if product.compare_at_price > product.price %}
-                      {% assign discount = product.compare_at_price | minus: product.price %}
-                      {% assign discount_percent = discount | times: 100 | divided_by: product.compare_at_price | round %}
-                    {% endif %}
-
-                    <div class="flex items-center gap-3 text-2xl">
-                      {% if product.compare_at_price > product.price %}
-                        <span class="text-red-600 font-bold text-[28px] discount-percent">
-                          -{{ discount_percent }}%
-                        </span>
-                      {% endif %}
-
-                      <span class="text-black font-bold text-[28px] product-price">
-                        {{ product.price | money }}
-                      </span>
-
-                      {% if product.compare_at_price > product.price %}
-                        <span class="text-gray-500 font-semibold line-through text-[22px] compare-price">
-                         RRP: {{ product.compare_at_price | money }}
-                        </span>
-                      {% endif %}
-                    </div>
-                    <div class="text-lg font-semibold text-black leading-normal">
-                      Works out at just {{ product.price | divided_by: product.metafields.custom.choose_your_fragrances_options | money }}/bottle
-                    </div>
-                  </div>
-                {% endif %}
-                
-              {%- when 'mobile_gallery' -%}
-                <div class="md:hidden">
-                  {% render 'product-mobile-media-gallery', variant_images: variant_images %}
-                </div>
-              {%- when 'reactive_variant_selector' -%}
-                <div class="reactive-variant-selector">
-                  {% render 'reactive-variant-selector', product: product %}
-                </div>
-              {%- when 'atc_bundle_builder' -%}
-                <div class="atc-bundle-builder" {{ block.shopify_attributes }}>
-                  {% if product.metafields.custom.choose_your_fragrances_options != blank %}
-                    {% render 'special-offer-builder', product: product %}
-                  {% else %}
-                    {% render 'reactive-variant-selector', product: product %}
-                  {% endif %}
-                </div>
-              {%- when 'shipping_text' -%}
-                <div class="!my-6">
-                  <p class="my-0 text-center font-semibold tracking-normal">
-                    5-8 Days Delivery to <span class="shipping_location">Worldwide</span>
-                  </p>
-                  <p class="my-0 text-center tracking-normal shipping_text_canada">
-                    *Shipping Fee Calculated At Checkout
-                  </p>
-                </div>
-              {%- when 'selling_points' -%}
-                <ul class="list-none p-0">
-                  {% for item in product.metafields.custom.selling_points.value %}
-                    <li class="flex gap-2 items-center text-gray-950 mb-4 leading-[1.2]">
-                      <img src="{{ 'tryscent-bottle.svg' | asset_url }}" alt="" height="24" width="24">
-                      {{ item }}
-                    </li>
-                  {% endfor %}
-                </ul>
-              {%- when 'money_back' -%}
-                <div class="flex items-center gap-3 bg-[#f0f2ec] p-6 rounded">
-                  <img src="{{ block.settings.image | img_url: '64x64' }}" height="64" width="64" alt="{{ block.settings.label }}" class="size-16" />
-                  <div>
-                    <h3 class="text-lg font-semibold tracking-normal m-0">{{ block.settings.title }}</h3>
-                    <div class="m-0 leading-snug tracking-normal [&>p]:m-0 text-gray-950">
-                      {{ block.settings.text }}
-                    </div>
-                  </div>
-                </div>
-              {% when 'people_purchased' %}
-                <div class="grid grid-cols-3 items-center gap-4 bg-[#f0f2ec] p-6 rounded">
-                  <div class="col-span-1 flex">
-                    <img class="w-full h-auto" src="https://cdn.shopify.com/s/files/1/0086/7932/5753/files/people-images.png?v=1756736550" alt="" height="" width="">
-                  </div>
-                  <div class="col-span-2">
-                    <p class="my-0 leading-snug tracking-normal">Over <strong>826</strong> peoples from <span class="shipping_location font-semibold">Worldwide</span> have ordered in the last 7 days.</p>
-                  </div>
-                </div>
-              {%- when 'cta_review' -%}
-                <div class="pt-6 pb-2 border-0 border-t border-solid border-gray-200">
-                  <div class="leading-snug tracking-normal italic [&_p]:!m-0 text-lg">
-                    {{ product.metafields.custom.cta_review.value.content | metafield_tag }}
-                  </div>
-                  <h3 class="mb-0 mt-2 text-base font-semibold text-gray-500 tracking-normal">
-                    {{ product.metafields.custom.cta_review.value.author }}
-                    <span class="jdgm-prev-badge__stars text-sm ml-2" data-score="5.00" tabindex="0" aria-label="5.00 stars" role="button"> <span class="jdgm-star jdgm--on"></span><span class="jdgm-star jdgm--on"></span><span class="jdgm-star jdgm--on"></span><span class="jdgm-star jdgm--on"></span><span class="jdgm-star jdgm--on"></span> </span>
-                  </h3>
-                </div>
-              {%- when 'videos' -%}
-                <div class="grid grid-cols-3 gap-3 pt-6 cta_videos">
-                  {% for i in (1..3) %}
-                    {% assign video_setting = 'video' | append: i %}
-                    {% assign video_poster_setting = 'video_poster_' | append: i %}
-                    {% if block.settings[video_setting] == blank %}
-                      {% continue %}
-                    {% endif %}
-                    {% assign video = block.settings[video_setting] %}
-                    <div class="aspect-w-16 aspect-h-9 relative">
-                      <video width="100%" class="rounded-lg shadow cursor-pointer" poster="{{ block.settings[video_poster_setting] |  image_url }}">
-                        <source src="{{ video.sources[1].url }}" type="video/mp4">
-                        Your browser does not support the video tag.
-                      </video>
-                    </div>
-                  {% endfor %}
-                </div>
               {%- when 'text' -%}
                 <p
-                  class="product__text inline-richtext !my-6 text-center{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}"
+                  class="product__text inline-richtext{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}"
                   {{ block.shopify_attributes }}
                 >
                   {{- block.settings.text -}}
                 </p>
               {%- when 'title' -%}
-                <div class="product__title relative" {{ block.shopify_attributes }}>
-                  {%- if product.tags contains 'bestseller' or product.tags contains 'onsale' -%}
-                    <div class="absolute top-0 left-0">
-                      {% if product.tags contains 'onsale' %}
-                        {%- assign discount_percent = 0 -%}
-                        {%- if product.compare_at_price > product.price -%}
-                          {%- assign discount_percent = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round -%}
-                        {%- endif -%}
-                        <span class="inline-block bg-red-600 text-white text-sm font-bold px-3 py-1">
-                          {{ discount_percent }}% Off
-                        </span>
-                      {% endif %}
-                      {% if product.tags contains 'bestseller' %}
-                        <span class="inline-block bg-[#22613A] text-white text-sm font-bold px-3 py-1 mr-2">
-                          Best Seller
-                        </span>
-                      {% endif %}
-                    </div>
-                  {%- endif -%}  
-                  <h1 class="font-[700] leading-tight capitalize !tracking-normal flex flex-col pt-8">
-                      {{ product.title }}
-                  </h1>
+                <div class="product__title" {{ block.shopify_attributes }}>
+                  <h1>{{ product.title | escape }}</h1>
+                  <a href="{{ product.url }}" class="product__title">
+                    <h2 class="h1">
+                      {{ product.title | escape }}
+                    </h2>
+                  </a>
                 </div>
-
               {%- when 'price' -%}
                 <div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
                   {%- render 'price',
                     product: product,
                     use_variant: true,
                     show_badges: true,
-                    price_class: 'price--large',
-                    show_compare_at_price: true
+                    price_class: 'price--large'
                   -%}
                 </div>
                 {%- if product.quantity_price_breaks_configured? -%}
@@ -372,16 +215,11 @@
                     <summary>
                       <div class="summary__title">
                         {% render 'icon-accordion', icon: block.settings.icon %}
-                        <h2 class="h4 accordion__title inline-richtext font-bold tracking-normal text-lg">
+                        <h2 class="h4 accordion__title inline-richtext">
                           {{ block.settings.heading | default: block.settings.page.title | escape }}
                         </h2>
-
-                        {% liquid
-                        %}
                       </div>
-                      <div class="svg-wrapper bg-black text-white !size-6 p-1 rounded-full !mr-0 flex items-center justify-center">
-                        {{- 'icon-plus.svg' | inline_asset_content -}}
-                      </div>
+                      {{- 'icon-caret.svg' | inline_asset_content -}}
                     </summary>
                     <div class="accordion__content rte" id="ProductAccordion-{{ block.id }}-{{ section.id }}">
                       {{ block.settings.content }}
@@ -401,9 +239,20 @@
                     | item_count_for_variant: product.selected_or_first_available_variant.id
                   -%}
                   {% # theme-check-enable %}
-                  <label class="quantity__label form__label visibility-hidden h-0 overflow-hidden m-0" for="Quantity-{{ section.id }}">
-                    {{ 'products.product.quantity.label' | t }}
-                    <span class="quantity__rules-cart{% if cart_qty == 0 %} hidden{% endif %}">
+                  <span class="visually-hidden" id="quantity-label-{{ section.id }}">
+                    {%- if cart_qty > 0 -%}
+                      {{- 'products.product.quantity.in_cart_aria_label' | t: quantity: cart_qty -}}
+                    {%- else -%}
+                      {{- 'products.product.quantity.label' | t -}}
+                    {%- endif -%}
+                  </span>
+                  <label
+                    class="quantity__label form__label"
+                    for="Quantity-{{ section.id }}"
+                    aria-labelledby="quantity-label-{{ section.id }}"
+                  >
+                    <span aria-hidden="true">{{ 'products.product.quantity.label' | t }}</span>
+                    <span class="quantity__rules-cart{% if cart_qty == 0 %} hidden{% endif %}" aria-hidden="true">
                       {%- render 'loading-spinner' -%}
                       <span
                         >(
@@ -413,17 +262,17 @@
                     </span>
                   </label>
                   <div class="price-per-item__container">
-                    <quantity-input class="bg-white p-1.5 rounded-full flex shadow" data-url="{{ product.url }}" data-section="{{ section.id }}">
-                      <button class="quantity__button !bg-black size-10 rounded-full" name="minus" type="button">
+                    <quantity-input class="quantity" data-url="{{ product.url }}" data-section="{{ section.id }}">
+                      <button class="quantity__button" name="minus" type="button">
                         <span class="visually-hidden">
                           {{- 'products.product.quantity.decrease' | t: product: product.title | escape -}}
                         </span>
-                        <span class="svg-wrapper text-white !w-5">
+                        <span class="svg-wrapper">
                           {{- 'icon-minus.svg' | inline_asset_content -}}
                         </span>
                       </button>
                       <input
-                        class="quantity__input focus:outline-none focus-visible:outline-none focus:shadow-none shadow-none focus:bg-transparent text-lg font-semibold text-black"
+                        class="quantity__input"
                         type="number"
                         name="quantity"
                         id="Quantity-{{ section.id }}"
@@ -438,11 +287,11 @@
                         value="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
                         form="{{ product_form_id }}"
                       >
-                      <button class="quantity__button !bg-black size-10 rounded-full" name="plus" type="button">
+                      <button class="quantity__button" name="plus" type="button">
                         <span class="visually-hidden">
                           {{- 'products.product.quantity.increase' | t: product: product.title | escape -}}
                         </span>
-                        <span class="svg-wrapper text-white !w-5">
+                        <span class="svg-wrapper">
                           {{- 'icon-plus.svg' | inline_asset_content -}}
                         </span>
                       </button>
@@ -518,7 +367,10 @@
                                 </dt>
                                 <dd>
                                   <span class="price-per-item--current">
-                                    {{- 'products.product.volume_pricing.price_at_each_html' | t: price: variant_price -}}
+                                    {{-
+                                      'products.product.volume_pricing.price_at_each_html'
+                                      | t: price: variant_price
+                                    -}}
                                   </span>
                                 </dd>
                               </dl>
@@ -626,14 +478,13 @@
               {%- when 'variant_picker' -%}
                 {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
               {%- when 'buy_buttons' -%}
-               {%- render 'buy-buttons',
+                {%- render 'buy-buttons',
                   block: block,
                   product: product,
                   product_form_id: product_form_id,
                   section_id: section.id,
                   show_pickup_availability: true
                 -%}
-                
               {%- when 'rating' -%}
                 {%- if product.metafields.reviews.rating.value != blank -%}
                   <div class="rating-wrapper">
@@ -886,39 +737,6 @@
     </script>
   </div>
 </product-info>
-  
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    // update shipping country text
-    const shippingLocation = document.querySelector(".shipping_location");
-    fetch("https://ipapi.co/country_name")
-      .then(response => response.text())
-      .then(countryName => {
-        shippingLocation.textContent = countryName;
-      })
-      .catch(error => {
-        console.error("Error fetching country code:", error);
-      });
-
-    const ctaVideos = document.querySelectorAll(".cta_videos video");
-    function pauseAllVideos() {
-      ctaVideos.forEach(video => {
-        video.pause();
-      });
-    }
-
-    ctaVideos.forEach(video => {
-      video.addEventListener("click", function () {
-        if (video.paused) {
-          pauseAllVideos();
-          video.play();
-        } else {
-          video.pause();
-        }
-      });
-    });
-  });
-</script>
 
 {% schema %}
 {
@@ -928,124 +746,6 @@
   "blocks": [
     {
       "type": "@app"
-    },
-    {
-      "type": "inspired_by",
-      "name": "Inspired By",
-      "limit": 1
-    },
-    {
-      "type": "cheaper_than",
-      "name": "Cheaper than",
-      "limit": 1,
-      "settings": [
-        {
-          "type": "number",
-          "id": "number",
-          "label": "Cheaper than amount",
-          "default": 250
-        }
-      ]
-    },
-    {
-      "type": "mobile_gallery",
-      "name": "Mobile Gallery",
-      "limit": 1
-    },
-    {
-      "type": "reactive_variant_selector",
-      "name": "Reactive Variant Selector",
-      "limit": 1
-    },
-    {
-      "type": "atc_bundle_builder",
-      "name": "Atc Bundle Builder",
-      "limit": 1
-    },
-    {
-      "type": "shipping_text",
-      "name": "Shipping Text",
-      "limit": 1
-    },
-    {
-      "type": "selling_points",
-      "name": "Selling Points",
-      "limit": 1
-    },
-    {
-      "type": "money_back",
-      "name": "Money Back Guarantee",
-      "limit": 1,
-      "settings": [
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Money Back Guarantee Badge"
-        },
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Money Back Guarantee Title",
-          "default": "Smell Before You Commit"
-        },
-        {
-          "type": "richtext",
-          "id": "text",
-          "label": "Money Back Guarantee Text"
-        }
-      ]
-    },
-    {
-      "type": "people_purchased",
-      "name": "People Purchased",
-      "limit": 1
-    },
-    {
-      "type": "cta_review",
-      "name": "CTA Review",
-      "limit": 1
-    },
-    {
-      "type": "videos",
-      "name": "Videos",
-      "limit": 1,
-      "settings": [
-        {
-          "type": "video",
-          "id": "video1",
-          "label": "Video 1"
-        },
-        {
-          "type": "image_picker",
-          "id": "video_poster_1",
-          "label": "Video Poster 1"
-        },
-        {
-          "type": "video",
-          "id": "video2",
-          "label": "Video 2"
-        },
-        {
-          "type": "image_picker",
-          "id": "video_poster_2",
-          "label": "Video Poster 2"
-        },
-        {
-          "type": "video",
-          "id": "video3",
-          "label": "Video 3"
-        },
-        {
-          "type": "image_picker",
-          "id": "video_poster_3",
-          "label": "Video Poster 3"
-        },
-        {
-          "type": "video",
-          "id": "video4",
-          "label": "Video 4"
-        }
-      ]
     },
     {
       "type": "text",
@@ -1988,7 +1688,7 @@
         {
           "type": "header",
           "content": "t:sections.main-product.blocks.icon_with_text.settings.pairing_2.label"
-        },        
+        },
         {
           "type": "select",
           "id": "icon_2",
@@ -2188,7 +1888,7 @@
         {
           "type": "header",
           "content": "t:sections.main-product.blocks.icon_with_text.settings.pairing_3.label"
-        },        
+        },
         {
           "type": "select",
           "id": "icon_3",
@@ -2490,7 +2190,7 @@
       ],
       "default": "hide",
       "label": "t:sections.main-product.settings.mobile_thumbnails.label"
-    },    
+    },
     {
       "type": "select",
       "id": "media_position",
