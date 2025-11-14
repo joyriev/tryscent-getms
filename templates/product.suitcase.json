@@ -40,19 +40,10 @@
             "show_gift_card_recipient": true
           }
         },
-        "text_Wn6heU": {
-          "type": "text",
+        "custom_liquid_bt6WcT": {
+          "type": "custom_liquid",
           "settings": {
-            "text": "7 left in stock. Free shipping on orders $100+.",
-            "text_style": "body"
-          }
-        },
-        "inventory_Uc4TFX": {
-          "type": "inventory",
-          "settings": {
-            "text_style": "body",
-            "inventory_threshold": 10,
-            "show_inventory_quantity": true
+            "custom_liquid": "{{product.selected_or_first_available_variant.inventory_quantity}} left in stock. Free shipping on orders $100+."
           }
         },
         "collapsible_tab_FAfqBN": {
@@ -72,8 +63,7 @@
         "price",
         "quantity_selector",
         "buy_buttons",
-        "text_Wn6heU",
-        "inventory_Uc4TFX",
+        "custom_liquid_bt6WcT",
         "collapsible_tab_FAfqBN"
       ],
       "custom_css": [],
