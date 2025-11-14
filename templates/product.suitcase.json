@@ -16,6 +16,12 @@
           "type": "title",
           "settings": {}
         },
+        "collectionproducts_eFKCVK": {
+          "type": "collectionproducts",
+          "settings": {
+            "collection_items": ""
+          }
+        },
         "variant_picker": {
           "type": "variant_picker",
           "settings": {
@@ -77,6 +83,7 @@
       },
       "block_order": [
         "title",
+        "collectionproducts_eFKCVK",
         "variant_picker",
         "price",
         "quantity_selector",
