@@ -238,7 +238,7 @@
                   {% if block.settings.tab_heading != blank %}
                    <h3 class="tab-description-heading">{{ block.settings.tab_heading }}</h3>
                   {% endif %}
-                  {% render 'description-tab' %}
+                  {% render 'description-tab', warrenty: block.settings.warrenty %}
                 </div>
 
               {%- when 'custom_liquid' -%}
