@@ -46,6 +46,12 @@
             "custom_liquid": "{{product.selected_or_first_available_variant.inventory_quantity}} left in stock. Free shipping on orders $100+."
           }
         },
+        "custom_liquid_nqHY4t": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<h2>Save $20 with a set</h2>\n<p>Shop smart. Add other items and save $20 when you order together with your {{product.title}}.</p>"
+          }
+        },
         "complementary_we3DeA": {
           "type": "complementary",
           "settings": {
@@ -77,6 +83,7 @@
         "quantity_selector",
         "buy_buttons",
         "custom_liquid_bt6WcT",
+        "custom_liquid_nqHY4t",
         "complementary_we3DeA",
         "collapsible_tab_FAfqBN"
       ],
