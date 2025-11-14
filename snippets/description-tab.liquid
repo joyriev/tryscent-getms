@@ -1,28 +1,108 @@
-<div class="tabs-container">
+<div class="suitcase-tabs-container">
 
-  <ul class="tabs-menu">
+  <ul class="suitcase-tabs-menu">
     <li class="active" data-tab="description">Description</li>
     <li data-tab="features">Features</li>
     <li data-tab="specs">Specs</li>
     <li data-tab="warranty">Warranty & Returns</li>
   </ul>
 
-  <div class="tabs-content">
-    <div id="description" class="tab-pane active">
+  <div class="suitcase-tabs-content">
+    <div id="description" class="suitcase-tab-pane active">
       <p>This is the description content...</p>
     </div>
 
-    <div id="features" class="tab-pane">
+    <div id="features" class="suitcase-tab-pane">
       <p>These are the features...</p>
     </div>
 
-    <div id="specs" class="tab-pane">
+    <div id="specs" class="suitcase-tab-pane">
       <p>Specs content goes here...</p>
     </div>
 
-    <div id="warranty" class="tab-pane">
+    <div id="warranty" class="suitcase-tab-pane">
       <p>Warranty and return info...</p>
     </div>
   </div>
 
 </div>
+
+<style>
+
+/* ---------- PARENT CONTAINER ---------- */
+.suitcase-tabs-container {
+  margin-top: 20px;
+  font-family: Arial, sans-serif;
+}
+
+/* ---------- TAB MENU ---------- */
+.suitcase-tabs-container .suitcase-tabs-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 30px;
+  border-bottom: 1px solid #ddd;
+  overflow-x: auto;  
+  white-space: nowrap;       
+  scrollbar-width: none;
+}
+
+.suitcase-tabs-container .suitcase-tabs-menu::-webkit-scrollbar {
+  display: none;
+}
+
+.suitcase-tabs-container .suitcase-tabs-menu li {
+  padding: 12px 5px;
+  cursor: pointer;
+  font-size: 16px;
+  color: #666;
+  flex-shrink: 0;
+}
+
+.suitcase-tabs-container .suitcase-tabs-menu li.active {
+  color: #000;
+  border-bottom: 2px solid #000;
+  font-weight: 600;
+}
+
+/* ---------- CONTENT PANES ---------- */
+.suitcase-tabs-container .suitcase-tab-pane {
+  display: none;
+  padding: 20px 0;
+  font-size: 15px;
+  color: #444;
+}
+
+.suitcase-tabs-container .suitcase-tab-pane.active {
+  display: block;
+}
+
+/* ---------- MOBILE RESPONSIVE ---------- */
+@media (max-width: 600px) {
+  .suitcase-tabs-container .suitcase-tabs-menu li {
+    padding: 10px 2px;
+    font-size: 14px;
+    margin-right: 15px;
+  }
+}
+
+</style>
+
+<script>
+document.querySelectorAll(".suitcase-tabs-menu li").forEach(tab => {
+  tab.addEventListener("click", function () {
+
+    tab.parentElement.querySelector(".active")?.classList.remove("active");
+    tab.classList.add("active");
+
+    const container = tab.closest(".suitcase-tabs-container");
+
+    container.querySelectorAll(".suitcase-tab-pane").forEach(pane => {
+      pane.classList.remove("active");
+    });
+
+    container.querySelector("#" + tab.dataset.tab).classList.add("active");
+  });
+});
+</script>
