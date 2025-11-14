@@ -1,0 +1,85 @@
+{% assign luggage_collection = collections['luggage'] %}
+
+<div class="custom-select">
+  <div class="select-label">CHANGE MODEL</div>
+
+  <ul class="select-options">
+    {% for product in luggage_collection.products %}
+      <li data-url="{{ product.url }}">{{ product.title }}</li>
+    {% endfor %}
+  </ul>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const selectBox = document.querySelector('.custom-select');
+  const selectLabel = selectBox.querySelector('.select-label');
+  const selectOptions = selectBox.querySelector('.select-options');
+  const optionItems = selectBox.querySelectorAll('.select-options li');
+
+  // Toggle dropdown
+  selectLabel.addEventListener('click', () => {
+    selectOptions.style.display = 
+      selectOptions.style.display === 'block' ? 'none' : 'block';
+  });
+
+  // On clicking an option (li)
+  optionItems.forEach(li => {
+    li.addEventListener('click', () => {
+      // 1. Update label
+      selectLabel.textContent = li.textContent;
+
+      // 2. Read product URL
+      let url = li.getAttribute('data-url');
+
+      // 3. Redirect to product page
+      window.location.href = url;
+    });
+  });
+
+  // Close when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.custom-select')) {
+      selectOptions.style.display = 'none';
+    }
+  });
+});
+</script>
+
+<style>
+.custom-select {
+  position: relative;
+  width: 280px;
+  cursor: pointer;
+  user-select: none;
+  font-family: inherit;
+}
+
+.select-label {
+  padding: 12px;
+  border: 1px solid #ccc;
+  background: #f8f8f8;
+  font-weight: 600;
+}
+
+.select-options {
+  display: none;
+  position: absolute;
+  width: 100%;
+  max-height: 240px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  background: white;
+  z-index: 20;
+  margin-top: 2px;
+}
+
+.select-options li {
+  padding: 12px;
+  list-style: none;
+}
+
+.select-options li:hover {
+  background: #efefef;
+}
+</style>
