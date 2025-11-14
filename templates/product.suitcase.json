@@ -16,12 +16,6 @@
           "type": "title",
           "settings": {}
         },
-        "cheaper_than_yDGYG9": {
-          "type": "cheaper_than",
-          "settings": {
-            "number": 0
-          }
-        },
         "variant_picker": {
           "type": "variant_picker",
           "settings": {
@@ -59,7 +53,6 @@
       },
       "block_order": [
         "title",
-        "cheaper_than_yDGYG9",
         "variant_picker",
         "price",
         "quantity_selector",
@@ -73,11 +66,11 @@
         "media_size": "large",
         "constrain_to_viewport": true,
         "media_fit": "contain",
-        "gallery_layout": "stacked",
+        "gallery_layout": "thumbnail_slider",
         "mobile_thumbnails": "hide",
         "media_position": "left",
         "image_zoom": "lightbox",
-        "hide_variants": true,
+        "hide_variants": false,
         "enable_video_looping": false,
         "padding_top": 36,
         "padding_bottom": 72
