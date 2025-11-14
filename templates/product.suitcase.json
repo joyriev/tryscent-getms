@@ -46,75 +46,6 @@
             "show_gift_card_recipient": true
           }
         },
-        "shipping_text_HCVN8A": {
-          "type": "shipping_text",
-          "disabled": true,
-          "settings": {}
-        },
-        "atc_bundle_builder_ipKhnU": {
-          "type": "atc_bundle_builder",
-          "disabled": true,
-          "settings": {}
-        },
-        "collapsible_tab_XYmgtQ": {
-          "type": "collapsible_tab",
-          "settings": {
-            "heading": "Description",
-            "icon": "clipboard",
-            "content": "{{ product.description }}",
-            "page": ""
-          }
-        },
-        "collapsible_tab_tUEYBx": {
-          "type": "collapsible_tab",
-          "disabled": true,
-          "settings": {
-            "heading": "Why are your perfumes so affordable?",
-            "icon": "perfume",
-            "content": "<p>Our perfumes are affordable because we focus on what really matters — the fragrance itself — and eliminate unnecessary costs:<br/><br/>✔️ No expensive advertising – We don’t invest in celebrity campaigns or luxury branding, which allows us to offer lower prices.<br/><br/>✔️ Simple, elegant packaging – Instead of costly designer bottles, we use minimalist, stylish packaging that keeps production costs low.<br/><br/>✔️ Direct sales model – By selling online and bottling ourselves, we avoid intermediaries and retail mark-ups.<br/><br/>✔️ Alternative compositions, premium quality <br/><br/>The result? You enjoy long-lasting, high-quality perfumes at a price that makes sense.</p>",
-            "page": ""
-          }
-        },
-        "collapsible_tab_nhKiAc": {
-          "type": "collapsible_tab",
-          "disabled": true,
-          "settings": {
-            "heading": "Is it a perfumed water?",
-            "icon": "perfume",
-            "content": "<p>Our fragrances go far beyond simple perfumed water. At Try Scent, we offer high-quality <strong>Eau de Parfum (EDP)</strong> with a perfume oil concentration of <strong>19-21%</strong>, ensuring long-lasting scent, excellent projection, and depth.</p><p>Unlike light body sprays or perfumed waters, our compositions are made to stay on your skin for many hours — often even until the next day. You enjoy an intense, refined fragrance experience at a fraction of the price of luxury brands.</p>",
-            "page": ""
-          }
-        },
-        "collapsible_tab_pCrhqV": {
-          "type": "collapsible_tab",
-          "disabled": true,
-          "settings": {
-            "heading": "How long does the perfume last?",
-            "icon": "perfume",
-            "content": "<p>Our perfumes are designed for excellent longevity. Thanks to a high fragrance oil concentration of <strong>19-21%</strong>, most of our scents stay noticeable on the skin for <strong>up to 24 hours</strong>, and often the fragrance can still be detected on clothes or hair the next day.</p><p>Of course, the exact durability depends on the specific fragrance, your skin type, and how it's applied — but compared to typical alternatives or light Eau de Toilette, Try Scent perfumes deliver significantly better performance.</p>",
-            "page": ""
-          }
-        },
-        "collapsible_tab_pdYPYn": {
-          "type": "collapsible_tab",
-          "disabled": true,
-          "settings": {
-            "heading": "What does 19-21% perfume mean?",
-            "icon": "perfume",
-            "content": "<p>The percentage indicates the concentration of pure fragrance oils in the product. In our case, <strong>19-21% perfume concentration</strong> means:</p><p>✔️ It is classified as <strong>Eau de Parfum (EDP)</strong> — one of the most intense types of perfume available for daily use.<br/><br/>✔️ High fragrance oil content ensures excellent <strong>longevity</strong> — the scent stays noticeable on your skin for many hours, often until the next day.<br/><br/>✔️ Strong <strong>projection and depth</strong> — the fragrance unfolds in layers and maintains a rich, lasting character.</p><p>For comparison:</p><ul><li>5-15% fragrance oils.<br/></li><li>15-25%, so our perfumes are at the upper end of this category.<br/></li><li>25%, but is often much more expensive.<br/></li></ul><p>In short: With 19-21%, you get an intense, long-lasting, and high-quality fragrance experience — perfect for anyone who wants designer-like performance at an affordable price.</p>",
-            "page": ""
-          }
-        },
-        "collapsible_tab_F64PJg": {
-          "type": "collapsible_tab",
-          "disabled": true,
-          "settings": {
-            "heading": "Compositions of Perfumes",
-            "icon": "perfume",
-            "content": "<p>Alcohol Denat. Parfum (Fragrance) Aqua (Water) Limonene Linalool Citronellol Geraniol Citral Benzyl Salicylate Coumarin Alpha-Isomethyl Ionone Hexyl Cinnamal Benzyl Benzoate</p>",
-            "page": ""
-          }
-        },
         "collapsible_tab_FAfqBN": {
           "type": "collapsible_tab",
           "settings": {
@@ -132,14 +63,6 @@
         "price",
         "quantity_selector",
         "buy_buttons",
-        "shipping_text_HCVN8A",
-        "atc_bundle_builder_ipKhnU",
-        "collapsible_tab_XYmgtQ",
-        "collapsible_tab_tUEYBx",
-        "collapsible_tab_nhKiAc",
-        "collapsible_tab_pCrhqV",
-        "collapsible_tab_pdYPYn",
-        "collapsible_tab_F64PJg",
         "collapsible_tab_FAfqBN"
       ],
       "custom_css": [],
