@@ -16,8 +16,16 @@ document.addEventListener("DOMContentLoaded", function() {
   const selectOptions = selectBox.querySelector('.select-options');
   const optionItems = selectBox.querySelectorAll('.select-options li');
 
+  document.addEventListener('click', function (e) {
+    const label = e.target.closest('.select-label');
+    if (label) {
+        label.classList.toggle('active');
+        console.log("Clicked:", label);
+    }
+});
   // 🔥 Event delegation for ANY future .select-label
   document.body.addEventListener('click', (e) => {
+    
     const clickedLabel = e.target.closest('.select-label');
 
       if (e.target.classList.contains('select-label')) {
