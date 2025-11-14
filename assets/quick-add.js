@@ -32,7 +32,47 @@ if (!customElements.get('quick-add-modal')) {
             const productElement = responseHTML.querySelector('product-info');
 
             this.preprocessHTML(productElement);
-            HTMLUpdateUtility.setInnerHTML(this.modalContent, productElement.outerHTML);
+            HTMLUpdateUtility.setInnerHTML(this.modalContent, productElement.outerHTML, function(){
+
+              document.addEventListener("DOMContentLoaded", function() {
+  const selectBox = document.querySelector('.custom-select');
+  const selectLabel = selectBox.querySelector('.select-label');
+  const selectOptions = selectBox.querySelector('.select-options');
+  const optionItems = selectBox.querySelectorAll('.select-options li');
+
+  // Toggle dropdown
+  document.querySelector('body').addEventListener('click', (e) => {
+    if(e.target == selectLabel){
+     selectOptions.style.display = 
+      selectOptions.style.display === 'block' ? 'none' : 'block';
+      selectLabel.classList.toggle('active');
+    }
+   
+
+  });
+
+  // On clicking an option (li)
+  optionItems.forEach(li => {
+    li.addEventListener('click', () => {
+      // 1. Update label
+      selectLabel.textContent = li.textContent;
+
+      // 2. Read product URL
+      let url = li.getAttribute('data-url');
+
+      // 3. Redirect to product page
+      window.location.href = url;
+    });
+  });
+
+  // Close when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.custom-select')) {
+      selectOptions.style.display = 'none';
+    }
+  });
+});
+            });
 
             if (window.Shopify && Shopify.PaymentButton) {
               Shopify.PaymentButton.init();
