@@ -40,6 +40,13 @@
             "show_gift_card_recipient": true
           }
         },
+        "text_Wn6heU": {
+          "type": "text",
+          "settings": {
+            "text": "7 left in stock. Free shipping on orders $100+.",
+            "text_style": "body"
+          }
+        },
         "collapsible_tab_FAfqBN": {
           "type": "collapsible_tab",
           "disabled": true,
@@ -57,6 +64,7 @@
         "price",
         "quantity_selector",
         "buy_buttons",
+        "text_Wn6heU",
         "collapsible_tab_FAfqBN"
       ],
       "custom_css": [],
