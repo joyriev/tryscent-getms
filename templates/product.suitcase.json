@@ -64,7 +64,7 @@
           "type": "custom_liquid",
           "name": "Combo Offer Text",
           "settings": {
-            "custom_liquid": "<h2>Save $20 with a set</h2>\n<p>Shop smart. Add other items and save $20 when you order together with your {{product.title}}.</p>"
+            "custom_liquid": "<h3 class=\"tab-description-heading\">Save $20 with a set</h3>\n<p>Shop smart. Add other items and save $20 when you order together with your {{product.title}}.</p>"
           }
         },
         "complementary_we3DeA": {
