@@ -50,7 +50,7 @@
           "type": "custom_liquid",
           "name": "Stock Content",
           "settings": {
-            "custom_liquid": "<p>{{product.selected_or_first_available_variant.inventory_quantity}} left in stock. Free shipping on orders $100+.</p>\n<br>"
+            "custom_liquid": "<p>{{product.selected_or_first_available_variant.inventory_quantity}} left in stock. Free shipping on orders $100+.</p>"
           }
         },
         "tabdescription_Q3VP8C": {
