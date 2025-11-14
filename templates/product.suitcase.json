@@ -43,7 +43,7 @@
         "custom_liquid_bt6WcT": {
           "type": "custom_liquid",
           "settings": {
-            "custom_liquid": "{{product.selected_or_first_available_variant.inventory_quantity}} left in stock. Free shipping on orders $100+."
+            "custom_liquid": "<p>{{product.selected_or_first_available_variant.inventory_quantity}} left in stock. Free shipping on orders $100+.</p>\n<br>"
           }
         },
         "custom_liquid_nqHY4t": {
