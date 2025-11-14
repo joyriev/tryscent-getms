@@ -19,7 +19,7 @@
         "collectionproducts_eFKCVK": {
           "type": "collectionproducts",
           "settings": {
-            "collection_items": ""
+            "collection_items": "luggage"
           }
         },
         "variant_picker": {
