@@ -68,7 +68,8 @@
         "tabdescription_Q3VP8C": {
           "type": "tabdescription",
           "settings": {
-            "tab_heading": "Product Information"
+            "tab_heading": "Product Information",
+            "warrenty": "<p>We offer a <a href=\"https://ca.monos.com/pages/faq#faq-returns-amp-exchanges\" title=\"100-day trial info\">100-day trial</a> on all our luggage. Take some time – make sure you’ve picked the perfect travel partner. If you don’t love it, send it back!</p><p>After 100 days, if any part of your Expandable Carry-On suitcase ever breaks, we’ll fix or replace it – guaranteed.</p>"
           }
         }
       },
