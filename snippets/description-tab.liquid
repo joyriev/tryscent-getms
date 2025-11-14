@@ -1,31 +1,31 @@
+{% assign parts = product.description | split: '<!-- split -->' %}
+
 <div class="suitcase-tabs-container">
 
   <ul class="suitcase-tabs-menu">
     <li class="active" data-tab="description">Description</li>
     <li data-tab="features">Features</li>
     <li data-tab="specs">Specs</li>
-    <li data-tab="warranty">Warranty & Returns</li>
   </ul>
 
   <div class="suitcase-tabs-content">
+
     <div id="description" class="suitcase-tab-pane active">
-      <p>This is the description content...</p>
+      {{ parts[0] }}
     </div>
 
     <div id="features" class="suitcase-tab-pane">
-      <p>These are the features...</p>
+      {{ parts[1] }}
     </div>
 
     <div id="specs" class="suitcase-tab-pane">
-      <p>Specs content goes here...</p>
+      {{ parts[2] }}
     </div>
 
-    <div id="warranty" class="suitcase-tab-pane">
-      <p>Warranty and return info...</p>
-    </div>
   </div>
 
 </div>
+
 
 <style>
 
