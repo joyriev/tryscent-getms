@@ -227,6 +227,9 @@
                 </p>
               {%- when 'tabdescription' -%}
                 <div class="product__description-tab" {{ block.shopify_attributes }}>
+                  {% if block.settings.tab_heading != blank %}
+                   <h3>{{ block.settings.tab_heading }}</h3>
+                  {% endif %}
                   {% render 'description-tab' %}
                 </div>
 
