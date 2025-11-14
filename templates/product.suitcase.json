@@ -48,6 +48,7 @@
         },
         "collapsible_tab_FAfqBN": {
           "type": "collapsible_tab",
+          "disabled": true,
           "settings": {
             "heading": "COMPARATIVE ADVERTISING DISCLAIMER",
             "icon": "star",
