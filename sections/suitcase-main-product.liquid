@@ -33,6 +33,10 @@
     .page-width-suitcase{
       padding:0 15px;
     }
+    .tab-description-heading {
+      font-size: 24px;
+      font-weight: 600;
+    }
     .page-width-suitcase .product--large .thumbnail-list {
         display: flex;
         flex-wrap: wrap;
@@ -228,7 +232,7 @@
               {%- when 'tabdescription' -%}
                 <div class="product__description-tab" {{ block.shopify_attributes }}>
                   {% if block.settings.tab_heading != blank %}
-                   <h3 class="tab-section-heading">{{ block.settings.tab_heading }}</h3>
+                   <h3 class="tab-description-heading">{{ block.settings.tab_heading }}</h3>
                   {% endif %}
                   {% render 'description-tab' %}
                 </div>
