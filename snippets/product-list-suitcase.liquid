@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function() {
     console.log(e.target)
     const clickedLabel = e.target.closest('.select-label');
 
-      if (clickedLabel) {
+      if (e.target.classList.contains('select-label')) {
       // If clicked on appended label
       const currentLabel = selectBox.querySelector('.select-label');
 
