@@ -47,6 +47,14 @@
             "text_style": "body"
           }
         },
+        "inventory_Uc4TFX": {
+          "type": "inventory",
+          "settings": {
+            "text_style": "body",
+            "inventory_threshold": 10,
+            "show_inventory_quantity": true
+          }
+        },
         "collapsible_tab_FAfqBN": {
           "type": "collapsible_tab",
           "disabled": true,
@@ -65,6 +73,7 @@
         "quantity_selector",
         "buy_buttons",
         "text_Wn6heU",
+        "inventory_Uc4TFX",
         "collapsible_tab_FAfqBN"
       ],
       "custom_css": [],
