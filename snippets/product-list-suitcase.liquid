@@ -74,7 +74,11 @@ document.addEventListener("DOMContentLoaded", function() {
     right: 20px;
     content: "";
     top: 50%;
-    transform: translateY(-50%);
+    transform: translateY(-50%) rotate(0deg);
+    transition:all 1s ease;
+}
+.collection-pro-items .select-label.active:after {
+    transform: translateY(-50%) rotate(180deg);
 }
 .collection-pro-items .select-options {
   display: none;
