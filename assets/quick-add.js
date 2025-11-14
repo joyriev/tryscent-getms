@@ -34,7 +34,7 @@ if (!customElements.get('quick-add-modal')) {
             this.preprocessHTML(productElement);
             HTMLUpdateUtility.setInnerHTML(this.modalContent, productElement.outerHTML);
             
-            document.addEventListener("DOMContentLoaded", function() {
+    
   const selectBox = document.querySelector('.custom-select');
   const selectLabel = selectBox.querySelector('.select-label');
   const selectOptions = selectBox.querySelector('.select-options');
@@ -71,7 +71,7 @@ if (!customElements.get('quick-add-modal')) {
       selectOptions.style.display = 'none';
     }
   });
-});
+
 
             if (window.Shopify && Shopify.PaymentButton) {
               Shopify.PaymentButton.init();
