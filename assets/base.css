@@ -3660,3 +3660,6 @@ details-disclosure > details {
     font-weight: 500;
 }
 
+.quick-add-modal .collection-pro-items {
+    display: none;
+}
