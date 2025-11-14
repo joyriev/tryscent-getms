@@ -243,7 +243,7 @@
 
                 {%- when 'collectionproducts' -%}
                   <div class="collection-pro-items" {{ block.shopify_attributes }}>
-                    {% render 'description-tab', warrenty: block.settings.warrenty %}
+                    {% render 'product-list-suitcase', warrenty: block.settings.warrenty %}
                   </div>
 
               {%- when 'custom_liquid' -%}
