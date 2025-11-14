@@ -241,6 +241,11 @@
                   {% render 'description-tab', warrenty: block.settings.warrenty %}
                 </div>
 
+                {%- when 'tabdescription' -%}
+                  <div class="collection-pro-items" {{ block.shopify_attributes }}>
+                    {% render 'description-tab', warrenty: block.settings.warrenty %}
+                  </div>
+
               {%- when 'custom_liquid' -%}
                 {{ block.settings.custom_liquid }}
               {%- when 'collapsible_tab' -%}
