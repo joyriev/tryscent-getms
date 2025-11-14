@@ -13,33 +13,31 @@
 <script>
 document.addEventListener("DOMContentLoaded", function() {
   const selectBox = document.querySelector('.custom-select');
-  let selectLabel = selectBox.querySelector('.select-label');
+  const selectLabel = selectBox.querySelector('.select-label');
   const selectOptions = selectBox.querySelector('.select-options');
   const optionItems = selectBox.querySelectorAll('.select-options li');
 
-  // Toggle dropdown using event delegation
-  document.body.addEventListener('click', (e) => {
-
-    // When clicking the label (even if dynamically appended)
+  // Toggle dropdown
+  document.querySelector('body').addEventListener('click', (e) => {
     if (e.target.closest('.select-label')) {
-      selectLabel = document.querySelector('.select-label'); // reassign in case replaced
-      selectOptions.style.display = 
-        selectOptions.style.display === 'block' ? 'none' : 'block';
-
+     selectOptions.style.display = 
+      selectOptions.style.display === 'block' ? 'none' : 'block';
       selectLabel.classList.toggle('active');
     }
+   
 
   });
 
   // On clicking an option (li)
   optionItems.forEach(li => {
     li.addEventListener('click', () => {
-      selectLabel = document.querySelector('.select-label'); // update dynamic label
-
+      // 1. Update label
       selectLabel.textContent = li.textContent;
 
+      // 2. Read product URL
       let url = li.getAttribute('data-url');
 
+      // 3. Redirect to product page
       window.location.href = url;
     });
   });
@@ -48,11 +46,9 @@ document.addEventListener("DOMContentLoaded", function() {
   document.addEventListener('click', (e) => {
     if (!e.target.closest('.custom-select')) {
       selectOptions.style.display = 'none';
-      selectLabel.classList.remove('active');
     }
   });
 });
-
 </script>
 
 <style>
