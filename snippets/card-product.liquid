@@ -250,9 +250,9 @@ TODO: Show bestseller tag if the product contains "bestseller" tag.
             {% endif %}
               </div>
 
-              <div class="!text-gray-500 text-sm font-semibold tracking-normal">
+              {% comment %} <div class="!text-gray-500 text-sm font-semibold tracking-normal">
                 Available in {{ card_product.variants_count }} sizes
-              </div>
+              </div> {% endcomment %}
 
               {% if card_product.metafields.custom.original_retail_price != blank %}
               <div class="text-sm">(Retail Price {{ card_product.metafields.custom.original_retail_price.value |  money }})</div>
